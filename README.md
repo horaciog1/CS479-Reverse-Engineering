@@ -15,23 +15,23 @@ I. **Operating System:**
       2. *The second computer runs Kali Linux in a dual-boot configuration with Windows.*
      
 II. **Hypervisor:**
-   - After setting up the Linux computers I procceded to install VirtualBox as the Hypervisor of my choice. This hypervisor will serve as the virtualization platform for running the Windows 11 VM.
+   - After setting up the Linux computers, I proceeded to install VirtualBox as the hypervisor of my choice. This hypervisor will be the virtualization platform for running the Windows 11 VM.
 
 III. **Windows 11 VM:**
-   - I downloaded a Windows 11 VM from [here](https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/). This is a VirtualBox preconfigured Windows 11 VM which is used only for demos. This VM restarts every hour and it will stop working on April. I decided to use this option since the installation is very fast and easy.
-   - There is also another option to create your own ISO [here](https://www.microsoft.com/en-us/software-download/windows11). But if you create your own installation, you will need to add a license key later on.
+   - I downloaded a Windows 11 VM from [here](https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/). This is a VirtualBox pre-configured Windows 11 VM used only for demos. This VM restarts every hour, and it will stop working in April. I decided to use this option since the installation is fast and easy.
+   - There is another option to create your own ISO [here](https://www.microsoft.com/en-us/software-download/windows11). But if you make your own installation, you must add a license key later.
 
-**System Isolation:** In this course we will be analyzing malware. Which means we will run the malware or parts of it to understand how it works. It is essential to keep the malware contained in a safe testing enviroment isolated of our computer. To isolate the malware we create a Virtual Machine to interact and analyze it. All the malware in this course was designed for Windows OS. To isolate even more, the main OS running the VM will be different, such as in my case, Kali Linux. If the malware accidentally escapes our isolation, it is unlikely to also work in the hypervisor host OS.
+**System Isolation:** In this course, we will analyze malware. Which means we will run the malware or parts of it to understand how it works. Keeping the malware in a safe testing environment isolated from our computers is essential. To isolate the malware, we create a virtual machine to interact with and analyze it. All the malware in this course was designed for Windows OS. The main OS running the VM will be different to isolate even more, such as Kali Linux. If the malware accidentally escapes our isolation, it is unlikely to also work in the hypervisor host OS.
 
-**Network Isolation:** To prevent malware from scaping, we will block all network capabilities of the VM. This can be acomplished from the VirtualBox menu in the Network tab. Once inside the network tab, we just need to uncheck the "Enable Network Adapter" box. We will disable the connectivity once we finished installing all the tools required for the class.
+**Network Isolation:** To prevent malware from scaping, we will block all network capabilities of the VM. This can be accomplished from the VirtualBox menu in the Network tab. Once inside the network tab, we must uncheck the "Enable Network Adapter" box. We will turn off the connectivity once we install all the tools required for the class.
 
-### Why Isolation?
+### Why isolation?
 
-In this course, malware analysis involves both static and dynamic analysis, these requieres running parts of the malware. Isolation is crucial to prevent potential harm to the host system and network. Using a virtual machine as a sandbox ensures that any malware escape is contained within the virtual environment.
+In this course, malware analysis involves static and dynamic analysis; these require running parts of the malware. Isolation is crucial to prevent potential harm to the host system and network. Using a virtual machine as a sandbox ensures that any malware escape is contained within the virtual environment.
 
 ### Permanent Disabling of Windows Defender
 Windows Defender can interfere with malware analysis by detecting, putting it into quarantine, and deleting samples, potentially leaking sensitive information to third parties.
-To do this I decided to first try to do the following method: https://woshub.com/disable-windows-defender-antivirus/#h2_2
+To do this, I decided to try the following method: https://woshub.com/disable-windows-defender-antivirus/#h2_2.
 
 1. **Boot into Safe Mode:**
    - Press Win + R to open the Run dialog.
@@ -76,7 +76,27 @@ reg add "HKLM\System\CurrentControlSet\Services\WdBoot" /v "Start" /t REG_DWORD 
       - `Windows Defender Cleanup`
       - `Windows Defender Scheduled Scan`
       - `Windows Defender Verification`
-4. Reboot and verify that Windows Defender remains disabled.
+4. **Reboot and verify that Windows Defender remains disabled:**
    - Run the Windows Security app.
    - Ensure that Microsoft Defender Antivirus is now disabled.
    - You should see the message: "Threat service has stopped. Restart it now."
+5. **Installed Tools on Victim Machine:**
+
+- **Visual Studio with C Compiler:**
+  - Installed following [Microsoft's instructions](https://learn.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=msvc-170) for C/C++ development.
+
+- **IDA Pro Education:**
+  - Installed using the provided download link and license key from Canvas. The Interactive Disassembler (IDA) is a disassembler for computer software that generates assembly language source code from machine-executable code. It supports a variety of executable formats for different processors and operating systems. This is used for the reverse engineering part (we will be using Ghidra in the future to decide which one is better).
+
+- **Flare-VM:**
+  - Followed the instructions on [Flare-VM GitHub](https://github.com/mandiant/flare-vm) to install the package manager for reverse engineering. Note: Installed after disabling Windows Defender. FLARE VM is a collection of software installation scripts for Windows systems that allows you to easily set up and maintain a reverse engineering environment on a virtual machine (VM).
+
+6. ** Take a snapshot:**
+- After installing all necessary tools, it is important to take a snapshot of the machine so we dont have to configure the VM every assignment.
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
