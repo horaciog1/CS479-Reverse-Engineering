@@ -82,3 +82,5 @@ path:
 - This section declares the string "/bin/sh" and labels it as `path`. The `lea` instruction from earlier loads the address of this string.
 <br>
 
+## Size
+My shellcode is **26 bytes long**. Here they are: `48 8D 3D 0B 00 00 00 48 31 D2 48 31 F6 B0 3B 0F 05 C3 2F 62 69 6E 2F 73 68 00`
