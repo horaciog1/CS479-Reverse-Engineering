@@ -84,3 +84,27 @@ path:
 
 ## Size
 My shellcode is **26 bytes long**. Here they are: `48 8D 3D 0B 00 00 00 48 31 D2 48 31 F6 B0 3B 0F 05 C3 2F 62 69 6E 2F 73 68 00`
+
+## Other approaches
+This was the first code that could actually work. The size of the shellcode was 36, so I decided to try to reduce this number. 
+I deleted the first two instructions and re-run the program, and the shellcode run perfectly. After that I thought that instead of using the whole `%rax` register I could use only the lower 8 bits `%al` to setup the execve number. I also deleted the `leave` instruction since I was not using the stack instructions from the beggining.
+```assembly
+.text
+.global _start
+_start:
+	push %rbp
+	mov %rsp, %rbp
+	
+	lea shellPath(%rip), %rdi
+	mov $59, %rax
+	xor %rsi, %rsi
+	xor %rdx, %rdx
+
+	syscall
+
+	leave
+	ret
+
+shellPath:
+	.string "/bin/sh"
+```
