@@ -1,4 +1,4 @@
-# Reverse Engineering Report: Win32.KeyPass
+# Reverse Engineering Report (Static Analysis): Win32.KeyPass
 
 ## Summary:
 Briefly summarize the key findings and actionable information.  
