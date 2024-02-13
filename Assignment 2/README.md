@@ -10,9 +10,11 @@ Briefly summarize the key findings and actionable information.
 - **Functionality:** Worm-like propagation, Crypto-ransomware
 
 ### Signatures:
-- **File Hash (MD5):**
-- **File Hash (SHA1):**
-- **File Hash (SHA-256):**
+The following hashes were obtained using the following linux commands:  `md5sum Win32.KeyPass.bin`, `sha1sum Win32.KeyPass.bin`, `sha256sum Win32.KeyPass.bin`, and `ssdeep Win32.KeyPass.bin`
+- **File Hash (MD5):** `6999c944d1c98b2739d015448c99a291`
+- **File Hash (SHA1):** `d9beb50b51c30c02326ea761b5f1ab158c73b12c`
+- **File Hash (SHA-256):** `35b067642173874bd2766da0d108401b4cf45d6e2a8b3971d95bf474be4f6282`
+- **File Hash (SSDEEP):** `49152:0u1ImfQE5L1PtWHeHoQAOs1dKvHHg/o2S1pj798JGKCO8C/eZRwCr:dzV5JPtWHeHoIs1dGHHx2S1998JGKCOC`
 - **YARA Rule:**
 ```yara
 rule malwareAnalysis {
