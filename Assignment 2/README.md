@@ -1,7 +1,8 @@
 # Reverse Engineering Report (Static Analysis): Win32.KeyPass
 
 ## Summary:
-Briefly summarize the key findings and actionable information.  
+The Win32.KeyPass ransomware is a malicious program initially designed for Windows 7 that has been used to create similar ransomwares. The analysis reveals its functionality as a combination of a virus, trojan, and ransomware, disguising itself as Windows system file and possible installed/downloaded from fake installers. It exhibits potential for manual control but does not attempt to create backdoors or similar, and its encryption scheme employs the AES-256 algorithm. The malware is designed for Windows compatibility, identified by the presence of the string "!This program cannot be run in DOS mode" within the binary, indicative of the Windows Portable Executable (PE) file format.
+
 
 ## Malware Analysis:
 ### Type of Malware:
@@ -32,7 +33,7 @@ rule malwareAnalysis {
 ### Clues about Origin:
 - **Similar Malware:**
 - **File/Strings Similarities:**
-- **Geographical Clues:**
+- **Geographical Clues:** No specific information about the geographical origin of the malware was found on the binary analysis. Searching the malware on google using the signatures we can found that someone found some files written in russian. Russian characters are not ASCII but instead an unicode block called Cryllic in UTF-8.
 
 ### C2 Infraestructure:
 - **Command and Control (C2):**
