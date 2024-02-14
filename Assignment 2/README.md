@@ -8,10 +8,11 @@ Briefly summarize the key findings and actionable information.
 - **Category:** Ransomware
 - **File Type:** Win32 EXE / PE32 Executable
 - **Target OS:** Microsoft Windows; using the strings command and CFF we can find a string "!This program cannot be run in DOS mode." within the binary, this reveals a significant association with the Windows Portable Executable (PE) file format. This string is a standard marker present in the header of Windows executable (.exe) files, indicating compatibility with the Windows operating system. The utilization of the PE format implies that the malware is designed to operate within the Windows ecosystem, this gives us a clue about its target OS.
-- **Functionality:** Worm-like propagation, Crypto-ransomware
+- **Functionality:** Propagated through fake installers, encrypts files with AES-256 algorithm, exhibits potential for manual control. This malware could be categorized as a combination of a virus, a trojan, and a ransomware, since it needs user execution, it comes disguised a normal program and encrypts files in the infected system.
 
 ### Signatures:
-Cybercriminals can edit their extension file types and the name of their malware, or even change small pieces of code within their malware to avoid the detection of antivirus. Malware signatures are like unique fingerprints that help antivirus programs recognize and stop known types of malicious software. These signatures are specific patterns or characteristics found in the code or behavior of malware. When security software scans files or monitors system activities, it compares these patterns with a database of known malware signatures. 
+Cybercriminals can edit their extension file types and the name of their malware or even change small pieces of code within their malware to avoid antivirus detection. Malware signatures are like unique fingerprints that help antivirus programs recognize and stop known types of malicious software. These signatures are specific patterns or characteristics found in the code or behavior of malware. When security software scans files or monitors system activities, it compares these patterns with a database of known malware signatures. Some of these hashes will completely change when something changes in the code, but when you use SSDEEP, it can compare how similar the malware is to other malware.   
+
 The following hashes were obtained using the following linux commands:  `md5sum Win32.KeyPass.bin`, `sha1sum Win32.KeyPass.bin`, `sha256sum Win32.KeyPass.bin`, and `ssdeep Win32.KeyPass.bin`
 - **File Hash (MD5):** `6999c944d1c98b2739d015448c99a291`
 - **File Hash (SHA1):** `d9beb50b51c30c02326ea761b5f1ab158c73b12c`
