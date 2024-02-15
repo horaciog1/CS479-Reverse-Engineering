@@ -71,7 +71,7 @@ keypassdecrypt@india.com
 
 ### Clues about Origin:
 - **Similar Malware:** This type of ransomware has been replicated a lot of times. There are several ransomware that utilize the KEYPASS extension file and are variants of this malware. One of them is the "STOP Ransomware" which I suspect is the parent malware and Win32.KEYPASS is a variant and/or derivation of the STOP ransomware. 
-- **File/Strings Similarities:** 
+- **File/Strings Similarities:** All of the Ransomware variants of this malware that have the KEYPASS extension use the same ransom note.
 - **Geographical Clues:** The binary analysis did not yield specific details regarding the geographical origin of the malware. However, a subsequent Google search using the malware signatures revealed instances of files containing Russian text. Notably, these files employed Russian characters, which fall within the Unicode block known as Cyrillic in UTF-8 encoding. Furthermore, the dialog box associated with the malware exhibited subpar English, leading to the inference that the attacker likely originates from outside the United States.
 
 ### C2 Infraestructure:
