@@ -12,7 +12,7 @@ The Win32.KeyPass ransomware is a malicious program initially designed for Windo
 - **Functionality:** Propagated through fake installers, encrypts files with AES-256 algorithm, exhibits potential for manual control. This malware could be categorized as a combination of a virus, a trojan, and a ransomware, since it needs user execution, it comes disguised a normal program and encrypts files in the infected system.
 
 ### Signatures:
-Cybercriminals can edit their extension file types and the name of their malware or even change small pieces of code within their malware to avoid antivirus detection. Malware signatures are like unique fingerprints that help antivirus programs recognize and stop known types of malicious software. These signatures are specific patterns or characteristics found in the code or behavior of malware. When security software scans files or monitors system activities, it compares these patterns with a database of known malware signatures. Some of these hashes will completely change when something changes in the code, but when you use SSDEEP, it can compare how similar the malware is to other malware.   
+Cybercriminals can edit their extension file types and the name of their malware or even change small pieces of code within their malware to avoid antivirus detection. Malware signatures are like unique fingerprints that help antivirus programs recognize and stop known types of malicious software. These signatures are specific patterns or characteristics found in the code or behavior of malware. When security software scans files or monitors system activities, it compares these patterns with a database of known malware signatures.Signatures help people recognize if they have the same malware. If every byte is exactly the same, the result of a cryptographic hash like SHA-256 (or weaker hashes like MD5) will match. Some of these hashes will completely change when something changes in the code, but when you use SSDEEP, it can compare how similar the malware is to other malware.   
 
 The following hashes were obtained using the following linux commands:  `md5sum Win32.KeyPass.bin`, `sha1sum Win32.KeyPass.bin`, `sha256sum Win32.KeyPass.bin`, and `ssdeep Win32.KeyPass.bin`
 - **File Hash (MD5):** `6999c944d1c98b2739d015448c99a291`
@@ -27,8 +27,16 @@ rule malwareAnalysis {
 ```
 
 ### Indicator of Compromise (IoC):
-- **File/Registry Changes:**
-- **Network Activities:**
+- **File/Registry Changes:** The malware creates a file in Desktop called "!!!DECRYPTION__KEYPASS__INFO!!!.txt", I assume the ransomware encrypts all the files within a directory, changes the extension of the files to .KEYPASS and ransom notes are created inside the directory.
+- The malware only encrypts the forst 5 mb of each file.
+- According to AnyRun.com, the malware writes to a desktop.ini file (may be used to cloak folders)
+- **Network Activities:** Since this is a static analysis, we cannot run the file. But in case we could, I would use wireshark to capture the network packets to see if the ransomware contacts a particular IP address or hostname.
+- Strings tool showed that the malware tries to do a DNS request to `http://kronus.pp.ua/upwinload/get.php`
+- There is also empty HTTP get request that appear using the command strings.
+- Ransom Note:
+```text
+
+ ```
 
 ### Clues about Origin:
 - **Similar Malware:**
@@ -37,6 +45,11 @@ rule malwareAnalysis {
 
 ### C2 Infraestructure:
 - **Command and Control (C2):**
+
+### Additional Insights:
+- Bitcoin-related images were discovered in the Icons folder using CFF Explorer. These images varied in size and resolution, indicating a potential adaptation for optimal display on diverse screen resolutions across computers.
+- 
+
 
 ## Conclusion:
 The analyzed file Win32.KeyPass.exe is identified as a variant of the STOP ransomware. This ransomware is known for encrypting files on the infected system and demanding a ransom for decryption. The behavior analysis indicates malicious activities such as encrypting files, creating ransomware instruction files, and modifying system folders. The static analysis reveals the presence of characteristics consistent with ransomware.
