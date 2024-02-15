@@ -32,7 +32,7 @@ rule malwareAnalysis {
 - According to AnyRun.com, the malware writes to a desktop.ini file (may be used to cloak folders)
 - **Network Activities:** Since this is a static analysis, we cannot run the file. But in case we could, I would use wireshark to capture the network packets to see if the ransomware contacts a particular IP address or hostname.
 - Strings tool showed that the malware tries to do a DNS request to `http://kronus.pp.ua/upwinload/get.php`
-- There is also empty HTTP get request that appear using the command strings.
+- There is also empty HTTP get request that appear when I used the strings command.
 - Ransom Note:
 ```text
 
