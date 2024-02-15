@@ -6,7 +6,7 @@ The Win32.KeyPass ransomware is a malicious program initially designed for Windo
 
 ## Malware Analysis:
 ### Type of Malware:
-- **Category:** Ransomware
+- **Category:** Ransomware, Crypto Virus, Files locker
 - **File Type:** Win32 EXE / PE32 Executable
 - **Target OS:** Microsoft Windows 7; using the strings command and CFF we can find a string "!This program cannot be run in DOS mode." within the binary, this reveals a significant association with the Windows Portable Executable (PE) file format. This string is a standard marker present in the header of Windows executable (.exe) files, indicating compatibility with the Windows operating system. The utilization of the PE format implies that the malware is designed to operate within the Windows ecosystem, this gives us a clue about its target OS.
 - **Functionality:** Propagated through fake installers, encrypts files with AES-256 algorithm, exhibits potential for manual control. This malware could be categorized as a combination of a virus, a trojan, and a ransomware, since it needs user execution, it comes disguised a normal program and encrypts files in the infected system.
@@ -70,8 +70,8 @@ keypassdecrypt@india.com
  ```
 
 ### Clues about Origin:
-- **Similar Malware:**
-- **File/Strings Similarities:**
+- **Similar Malware:** This type of ransomware has been replicated a lot of times. There are several ransomware that utilize the KEYPASS extension file and are variants of this malware. One of them is the "STOP Ransomware" which I suspect is the parent malware and Win32.KEYPASS is a variant and/or derivation of the STOP ransomware. 
+- **File/Strings Similarities:** 
 - **Geographical Clues:** The binary analysis did not yield specific details regarding the geographical origin of the malware. However, a subsequent Google search using the malware signatures revealed instances of files containing Russian text. Notably, these files employed Russian characters, which fall within the Unicode block known as Cyrillic in UTF-8 encoding. Furthermore, the dialog box associated with the malware exhibited subpar English, leading to the inference that the attacker likely originates from outside the United States.
 
 ### C2 Infraestructure:
