@@ -20,13 +20,13 @@
 8. If I perform a div instruction, where would I find the remainder of the binary division (modulo)?   
     `According to the manual, after performing a div instruction, the remainder of the binary division would be stored in the RDX register on x86-64 architecture.`
 9. How does jz decide whether to jump or not?   
-    `This is an answer`
+    `The jz (jump if zero) instruction checks the zero flag (ZF) in the processor's flags register. If the zero flag is set (indicating that the result of a previous operation was zero), the jz instruction will jump to the specified target address.`
 10. How does jne decide whether to jump or not?   
-    `This is an answer`
+    `The jne (jump if not equal) instruction checks the zero flag (ZF) in the processor's flags register. If the zero flag is not set (indicating that the result of a previous operation was not zero), the jne instruction will jump to the specified target address.`
 11. What does a mov instruction do?   
-    `This is an answer`
+    `The mov (move) instruction copies data from a source operand to a destination operand. It is used to transfer values between registers, memory locations, or immediate values.`
 12. What does the TF flag do, and why is it useful for debugging?   
-    `This is an answer`
+    `The TF (trap flag) is a flag in the processor's flags register. When the TF flag is set, the processor enters single-step mode, which causes it to generate a "trap" after the execution of each instruction. This is useful for debugging, because it allows programmers to execute the program one instruction at a time, inspecting the state of registers and memory at each step.`
 13. Why would an attacker want to control the RIP register inside a program they want to take control of?   
     `This is an answer`
 14. What is the ax register and how does it relate to rax?   
@@ -34,18 +34,18 @@
     <br>
     ![RAX](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/0a6377c1-c870-4dcb-bfca-681576f9369f)
  
-16. What is the result of the instruction xor rax, rax and where is it stored?   
+15. What is the result of the instruction xor rax, rax and where is it stored?   
     `The xor %rax, %rax instruction sets the value of the rax register to 0. The result is stored in the rax register.`
-17. What does the leave instruction do in terms of registers to leave a stack frame?   
+16. What does the leave instruction do in terms of registers to leave a stack frame?   
     `The leave instruction is often used in function epilogues to clean up the stack frame. The leave instruction is used to clean up the stack frame by restoring the previous stack frame's state before returning from a function. It sets the stack pointer esp to the value stored in the base pointer ebp. This deallocates the local variables and other stack frame-related data. It is equivalent to:`   
     ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/9cfbd317-807c-411b-b8c8-85a1907fd31c)
-19. What pop instruction is retn equivalent to?   
+17. What pop instruction is retn equivalent to?   
     `The instruction retn is equivalent to "pop %rip" or "pop %eip" depending on the operand size`
-20. What is a stack overflow?   
+18. What is a stack overflow?   
     `This is an answer`
-21. What is a segmentation fault (a.k.a. a segfault)?   
+19. What is a segmentation fault (a.k.a. a segfault)?   
     `This is an answer`
-22. What are the RSI and RDI registers for that gives them their name?   
+20. What are the RSI and RDI registers for that gives them their name?   
     `This is an answer`
 
 ---
