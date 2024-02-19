@@ -16,9 +16,9 @@
 6. What is in the code section of a program's virtual memory space?   
     `This is an answer`
 7. What does the inc instruction do, and how many operands does it take?   
-    `This is an answer`
+    `The inc instruction increments the value of the specified operand by 1. It takes only one operand. For example, inc eax would increment the value in the eax register by 1.`
 8. If I perform a div instruction, where would I find the remainder of the binary division (modulo)?   
-    `This is an answer`
+    `According to the manual, after performing a div instruction, the remainder of the binary division would be stored in the RDX register on x86-64 architecture.`
 9. How does jz decide whether to jump or not?   
     `This is an answer`
 10. How does jne decide whether to jump or not?   
@@ -30,18 +30,21 @@
 13. Why would an attacker want to control the RIP register inside a program they want to take control of?   
     `This is an answer`
 14. What is the ax register and how does it relate to rax?   
+    `AX is the lower 16 bits of the RAX register. Similarly, AH represents the higher 8 bits, and AL represents the lower 8 bits. The RAX register is the 64-bit version, and then EAX (32 bits), AX (16 bits), AH (8 bits), and AL (8 bits). This distribution is better explained in the following image:`   
+    <br>
+    ![RAX](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/0a6377c1-c870-4dcb-bfca-681576f9369f)
+ 
+16. What is the result of the instruction xor rax, rax and where is it stored?   
     `This is an answer`
-15. What is the result of the instruction xor rax, rax and where is it stored?   
+17. What does the leave instruction do in terms of registers to leave a stack frame?   
     `This is an answer`
-16. What does the leave instruction do in terms of registers to leave a stack frame?   
+18. What pop instruction is retn equivalent to?   
     `This is an answer`
-17. What pop instruction is retn equivalent to?   
+19. What is a stack overflow?   
     `This is an answer`
-18. What is a stack overflow?   
+20. What is a segmentation fault (a.k.a. a segfault)?   
     `This is an answer`
-19. What is a segmentation fault (a.k.a. a segfault)?   
-    `This is an answer`
-20. What are the RSI and RDI registers for that gives them their name?   
+21. What are the RSI and RDI registers for that gives them their name?   
     `This is an answer`
 
 ---
