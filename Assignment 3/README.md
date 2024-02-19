@@ -4,11 +4,11 @@
 ### Answer the following in complete sentences:
 
 1. What is the difference between machine code and assembly?   
-    `This is an answer`
+        `The main difference between machine code and assembly, is that machine code is only understand by the computers and is very difficult to understand by the human beings, it is the low-level binary representation of instructions that a computer's CPU can directly execute. It is represented by 0s and 1s. Assembly language, on the other hand, is a human-readable, symbolic representation of machine code instructions. It uses mnemonics and symbols to represent operations and operands, making it easier for programmers to write and understand code. `
 2. If the ESP register is pointing to memory address 0x00000000001270A4 and I execute a pushq rax instruction, what address will rsp now be pointing to?   
     `This is an answer`
 3. What is a stack frame?   
-    `This is an answer`
+    `A stack frame is a portion of a program's call stack that contains local variables, function parameters, and other information needed for a specific function's execution. It is created when a function is called and typically includes a return address, saved registers, and space for local variables. The stack frame is essential for maintaining the function's state and facilitating the return from the function`
 4. What would you find in a data section?   
     `This is an answer`
 5. What is the heap used for?   
@@ -30,12 +30,12 @@
 13. Why would an attacker want to control the RIP register inside a program they want to take control of?   
     `This is an answer`
 14. What is the ax register and how does it relate to rax?   
-    `AX is the lower 16 bits of the RAX register. Similarly, AH represents the higher 8 bits, and AL represents the lower 8 bits. The RAX register is the 64-bit version, and then EAX (32 bits), AX (16 bits), AH (8 bits), and AL (8 bits). This distribution is better explained in the following image:`   
+    `AX is the lower 16 bits of the RAX register. AX is usually called accumulator register, most of arithmatical operations are done with AX. Similarly, AH represents the higher 8 bits, and AL represents the lower 8 bits. The RAX register is the 64-bit version, and then EAX (32 bits), AX (16 bits), AH (8 bits), and AL (8 bits). This distribution is better explained in the following image:`   
     <br>
     ![RAX](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/0a6377c1-c870-4dcb-bfca-681576f9369f)
  
 16. What is the result of the instruction xor rax, rax and where is it stored?   
-    `This is an answer`
+    `The xor rax, rax instruction sets the value of the rax register to 0. The result is stored in the rax register.`
 17. What does the leave instruction do in terms of registers to leave a stack frame?   
     `This is an answer`
 18. What pop instruction is retn equivalent to?   
