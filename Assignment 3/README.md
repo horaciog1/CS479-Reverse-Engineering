@@ -8,7 +8,7 @@
 2. If the ESP register is pointing to memory address 0x00000000001270A4 and I execute a pushq rax instruction, what address will rsp now be pointing to?   
     `This is an answer`
 3. What is a stack frame?   
-    `A stack frame is a portion of a program's call stack that contains local variables, function parameters, and other information needed for a specific function's execution. It is created when a function is called and typically includes a return address, saved registers, and space for local variables. The stack frame is essential for maintaining the function's state and facilitating the return from the function`
+    `A stack frame is a portion of a program's call stack that contains local variables, function parameters, and other information needed for a specific function's execution. It is created when a function is called and typically includes a return address, saved registers, and space for local variables. The stack frame is essential for maintaining the function's state and facilitating the return from the function. I like to think it like a temporary workspace for a function. When a function is called, the computer sets up this workspace in the computer's memory to keep things organized.`
 4. What would you find in a data section?   
     `This is an answer`
 5. What is the heap used for?   
@@ -35,11 +35,11 @@
     ![RAX](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/0a6377c1-c870-4dcb-bfca-681576f9369f)
  
 16. What is the result of the instruction xor rax, rax and where is it stored?   
-    `The xor rax, rax instruction sets the value of the rax register to 0. The result is stored in the rax register.`
+    `The xor %rax, %rax instruction sets the value of the rax register to 0. The result is stored in the rax register.`
 17. What does the leave instruction do in terms of registers to leave a stack frame?   
     `This is an answer`
 18. What pop instruction is retn equivalent to?   
-    `This is an answer`
+    `The instruction retn is equivalent to "pop %rip" or "pop %eip" depending on the operand size`
 19. What is a stack overflow?   
     `This is an answer`
 20. What is a segmentation fault (a.k.a. a segfault)?   
