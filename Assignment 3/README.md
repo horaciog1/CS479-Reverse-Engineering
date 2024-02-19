@@ -43,13 +43,15 @@
     `This is an answer`
 20. What are the RSI and RDI registers for that gives them their name?   
     `This is an answer`
+
+---
     
-# Crackme
+## Crackme
 
-## Screenshots
+### Screenshots
 
-## How you solved it, and what the solution was.
+### How you solved it, and what the solution was.
 
-## Whether Ghidra or IDA was more helpful to you, and why.
+### Whether Ghidra or IDA was more helpful to you, and why.
 
   
