@@ -28,7 +28,7 @@
 12. What does the TF flag do, and why is it useful for debugging?   
     `The TF (trap flag) is a flag in the processor's flags register. When the TF flag is set, the processor enters single-step mode, which causes it to generate a "trap" after the execution of each instruction. This is useful for debugging, because it allows programmers to execute the program one instruction at a time, inspecting the state of registers and memory at each step.`
 13. Why would an attacker want to control the RIP register inside a program they want to take control of?   
-    `This is an answer`
+    `The RIP (instruction pointer) register holds the address of the next instruction to be executed. If an attacker can control the RIP register, they can manipulate the program's control flow, asking it to execute certain instructions or code of their choice. This is a common goal in many types of attacks, such as buffer overflow exploits.`
 14. What is the ax register and how does it relate to rax?   
     `AX is the lower 16 bits of the RAX register. AX is usually called accumulator register, most of arithmatical operations are done with AX. Similarly, AH represents the higher 8 bits, and AL represents the lower 8 bits. The RAX register is the 64-bit version, and then EAX (32 bits), AX (16 bits), AH (8 bits), and AL (8 bits). This distribution is better explained in the following image:`   
     <br>
