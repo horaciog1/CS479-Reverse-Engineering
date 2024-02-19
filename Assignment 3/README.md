@@ -10,7 +10,7 @@
 3. What is a stack frame?   
     `A stack frame is a portion of a program's call stack that contains local variables, function parameters, and other information needed for a specific function's execution. It is created when a function is called and typically includes a return address, saved registers, and space for local variables. The stack frame is essential for maintaining the function's state and facilitating the return from the function. I like to think it like a temporary workspace for a function. When a function is called, the computer sets up this workspace in the computer's memory to keep things organized.`
 4. What would you find in a data section?   
-    `This is an answer`
+    `In a data section, you would find initialized static variables and constants. These variables have predetermined values specified by the programmer and are stored in the program's memory when it is loaded.f`
 5. What is the heap used for?   
     `This is an answer`
 6. What is in the code section of a program's virtual memory space?   
@@ -37,14 +37,15 @@
 16. What is the result of the instruction xor rax, rax and where is it stored?   
     `The xor %rax, %rax instruction sets the value of the rax register to 0. The result is stored in the rax register.`
 17. What does the leave instruction do in terms of registers to leave a stack frame?   
-    `The leave instruction is often used in function epilogues to clean up the stack frame. The leave instruction is used to clean up the stack frame by restoring the previous stack frame's state before returning from a function. It sets the stack pointer esp to the value stored in the base pointer ebp. This deallocates the local variables and other stack frame-related data. It is equivalent to:` ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/9cfbd317-807c-411b-b8c8-85a1907fd31c)
-18. What pop instruction is retn equivalent to?   
+    `The leave instruction is often used in function epilogues to clean up the stack frame. The leave instruction is used to clean up the stack frame by restoring the previous stack frame's state before returning from a function. It sets the stack pointer esp to the value stored in the base pointer ebp. This deallocates the local variables and other stack frame-related data. It is equivalent to:`   
+    ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/9cfbd317-807c-411b-b8c8-85a1907fd31c)
+19. What pop instruction is retn equivalent to?   
     `The instruction retn is equivalent to "pop %rip" or "pop %eip" depending on the operand size`
-19. What is a stack overflow?   
+20. What is a stack overflow?   
     `This is an answer`
-20. What is a segmentation fault (a.k.a. a segfault)?   
+21. What is a segmentation fault (a.k.a. a segfault)?   
     `This is an answer`
-21. What are the RSI and RDI registers for that gives them their name?   
+22. What are the RSI and RDI registers for that gives them their name?   
     `This is an answer`
 
 ---
