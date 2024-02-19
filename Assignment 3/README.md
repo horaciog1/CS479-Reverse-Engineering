@@ -37,7 +37,7 @@
 16. What is the result of the instruction xor rax, rax and where is it stored?   
     `The xor %rax, %rax instruction sets the value of the rax register to 0. The result is stored in the rax register.`
 17. What does the leave instruction do in terms of registers to leave a stack frame?   
-    `This is an answer`
+    `The leave instruction is often used in function epilogues to clean up the stack frame. The leave instruction is used to clean up the stack frame by restoring the previous stack frame's state before returning from a function. It sets the stack pointer esp to the value stored in the base pointer ebp. This deallocates the local variables and other stack frame-related data. It is equivalent to:` ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/9cfbd317-807c-411b-b8c8-85a1907fd31c)
 18. What pop instruction is retn equivalent to?   
     `The instruction retn is equivalent to "pop %rip" or "pop %eip" depending on the operand size`
 19. What is a stack overflow?   
