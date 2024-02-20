@@ -42,9 +42,9 @@
 17. What pop instruction is retn equivalent to?   
     `The instruction retn is equivalent to "pop %rip" or "pop %eip" depending on the operand size`
 18. What is a stack overflow?   
-    `This is an answer`
+    `A stack overflow occurs when the call stack grows beyond its allocated size. This can happen if too many function calls or excessive local variable storage which lead to the stack overwriting memory regions. Stack overflows can result in crashes, unpredictable behavior, or even security vulnerabilities.`
 19. What is a segmentation fault (a.k.a. a segfault)?   
-    `This is an answer`
+    `A segmentation fault occurs when a program attempts to access memory that "does not belong to it" or perform an invalid operation. It is caused by a program trying to read or write an illegal memory location. It is a protection mechanism provided by the operating system to prevent processes from corrupting each other's memory. In most cases, attempting to dereference a null pointer or accessing memory outside the bounds of an allocated buffer can lead to a segmentation fault. This causes the program to crash.`
 20. What are the RSI and RDI registers for that gives them their name?   
     `This is an answer`
 
