@@ -18,7 +18,7 @@
 7. What does the inc instruction do, and how many operands does it take?   
     `The inc instruction increments the value of the specified operand by 1. It takes only one operand. For example, inc eax would increment the value in the eax register by 1.`
 8. If I perform a div instruction, where would I find the remainder of the binary division (modulo)?   
-    `According to the manual, after performing a div instruction, the remainder of the binary division would be stored in the RDX register on x86-64 architecture.`
+    `According to the assembly language manual, after performing a div instruction, the remainder of the binary division would be stored in the RDX register on x86-64 architecture.`
 9. How does jz decide whether to jump or not?   
     `The jz (jump if zero) instruction checks the zero flag (ZF) in the processor's flags register. If the zero flag is set (indicating that the result of a previous operation was zero), the jz instruction will jump to the specified target address.`
 10. How does jne decide whether to jump or not?   
@@ -46,7 +46,7 @@
 19. What is a segmentation fault (a.k.a. a segfault)?   
     `A segmentation fault occurs when a program attempts to access memory that "does not belong to it" or perform an invalid operation. It is caused by a program trying to read or write an illegal memory location. It is a protection mechanism provided by the operating system to prevent processes from corrupting each other's memory. In most cases, attempting to dereference a null pointer or accessing memory outside the bounds of an allocated buffer can lead to a segmentation fault. This causes the program to crash.`
 20. What are the RSI and RDI registers for that gives them their name?   
-    `This is an answer`
+    `The RSI (Source Index)(source for data copies) and RDI (Destination Index)(destination for data copies)registers are general-purpose registers. They were historically associated with string operations, where RSI typically points to the source string, and RDI points to the destination string during operations like copying or comparing strings. The "Index" in their names reflects their usage as indices or pointers for string operations. However, their use is not restricted to string operations, and they are general-purpose registers that can be utilized for various purposes in a program.`
 
 ---
     
