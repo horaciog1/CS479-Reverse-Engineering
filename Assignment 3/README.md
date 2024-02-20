@@ -53,6 +53,11 @@
 ## Crackme
 
 ### Screenshots
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/690ae16d-914e-458b-88e7-978d2784e179)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/f7117512-7c34-41f2-928b-830d770004f2)
+
+
+
 
 ### How you solved it, and what the solution was.
 
