@@ -12,9 +12,9 @@
 4. What would you find in a data section?   
     `In a data section, you would find initialized static variables and constants. These variables have predetermined values specified by the programmer and are stored in the program's memory when it is loaded.f`
 5. What is the heap used for?   
-    `This is an answer`
+    `The heap is a region of memory used for dynamic memory allocation during a program's runtime. It is where the program can request memory dynamically using functions like malloc or new. A program process can use the heap to store data in some variable amount that won't be known until the program is running. The heap allows for flexible memory management, enabling the allocation and deallocation of memory as needed.`
 6. What is in the code section of a program's virtual memory space?   
-    `This is an answer`
+    `The code section of a program's virtual memory space contains the machine code instructions or executable code of the program. It is where the executable instructions reside, and the CPU fetches and executes them sequentially during program execution.`
 7. What does the inc instruction do, and how many operands does it take?   
     `The inc instruction increments the value of the specified operand by 1. It takes only one operand. For example, inc eax would increment the value in the eax register by 1.`
 8. If I perform a div instruction, where would I find the remainder of the binary division (modulo)?   
