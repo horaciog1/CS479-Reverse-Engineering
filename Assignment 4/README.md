@@ -78,6 +78,27 @@ If you want to see the output that the keygen generates, you can use:
 
 ## [ezcrackme3.zip ](https://github.com/tolvumadur/Reverse-Engineering-Class/blob/main/Spring23/Samples/binaries/ezcrackme3.zip)
 ### Reverse Engineering Report
+This crackme was a little bit more complicated because when I tried to use FLOSS or strings on it it gave me two different suspicious strings: `strawberry` and `kiwi`. I tried to use both strings as passwords but none of them worked.   
+
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/b822cfc2-7969-440d-8c5d-9ac695a91a07)
+
+<br>
+After this, I decided to open the file in Ghidra. First, I scanned the code from bottom to top, and after inspecting the code for a little bit I changed the variable names to more compelling names.   
+
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/b49a1418-fe7c-4cbc-bab3-d2a06fb3a0b5)   
+
+I noticed all variables were set to 0. I also notice that the `getinput()` function was being called with two arguments that after inspecting inside the function, I assumed were the input from the user (or password being used) and the size of the password. I got that idea from the fact that `getinput()` was using the library function `strlen()` to what I assumed was the size of the input.   
+
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/0d8e3ff4-8e86-45bc-8613-ab3268ee314c)   
+
+Then going back to the main function, I notice that lines 30 and 31 were using a library function called `strcat()` which according to the website Programiz.com, it is used to concatenate two variables.
+
+The function definition of `strcat()` is:
+>char *strcat(char *destination, const char *source)
+
+local38 was null, so then after the first `strcat()` function it will be `strawberry `, and after the second call of the function, it will be `strawberrykiwi`.   
+
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/ea3dd0a5-86db-4d88-b0a8-c539e33d22f6)   
 
 
 
