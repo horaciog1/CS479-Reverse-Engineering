@@ -94,8 +94,6 @@ For this particular ransomware, I initially struggled to understand the decompil
 
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/02c24a8d-3f76-42d9-9b0a-6e82a08c868d)   
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/458b1f3c-572a-457d-bfc1-6e524e895db6)
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/4c76e284-b07a-4116-90f3-fa1e215f4dfe)
-
 
 
 
