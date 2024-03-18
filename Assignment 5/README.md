@@ -7,6 +7,12 @@
 ## Report and Decryption process
 The decryption of the files encrypted by ransomware1 works by xoring all the bytes in the file with the char '4'. After the XOR operation, this new bytes are written to a new file called secret.txt and the file is finally decrypted.
 ### Decryption program
+
+To make decrypt.py executable, type:
+```bash
+chmod +x decrypt.py
+```
+
 decrypt.py
 ```python3
 #!/usr/bin/env python3
@@ -43,28 +49,37 @@ with open(infile, "rb") as inf:
 ## Report and Decryption process
 The decryption of the files encrypted by ransomware1 works by xoring all the bytes in the file with the char '4'. After the XOR operation, this new bytes are written to a new file called secret.txt and the file is finally decrypted.
 ### Decryption program
+
+To make decrypt.py executable, type:
+```bash
+chmod +x decrypt.py
+```
+
 decrypt.py
 ```python3
 #!/usr/bin/env python3
 
 import sys
 
-if (len(sys.argv)!=3):
+if len(sys.argv) != 3:
     print("Usage: decrypt.py INFILE OUTFILENAME")
+    sys.exit(1)
 
 infile = sys.argv[1]
 outfile = sys.argv[2]
-key = ord('4')
+key = "1337"
 
 with open(infile, "rb") as inf:
     with open(outfile, "wb") as ouf:
-
         contents = inf.read()
-        
-        for b in contents:
-            ouf.write((b ^ key).to_bytes(1, "big"))
+        decrypted_contents = bytearray()
 
+        # XOR each byte with the corresponding character from the key
+        for i in range(len(contents)):
+            decrypted_byte = contents[i] ^ ord(key[i % len(key)])
+            decrypted_contents.append(decrypted_byte)
 
+        ouf.write(decrypted_contents)
 ````
 ### secret.txt
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/9bf8fcd3-66b8-4277-8323-a39735d55bca)
