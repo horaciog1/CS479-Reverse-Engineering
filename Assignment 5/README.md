@@ -92,3 +92,10 @@ with open(infile, "rb") as inf:
 ### Screenshot of IDA inside decryption()
 For this particular ransomware, I initially struggled to understand the decompilation process using Ghidra since there was a lot of unrecognized functions. To gain a better understanding, I decided to experiment with IDA. Upon decompiling the file with IDA, everything became clearer. Unlike Ghidra, IDA was proficient at recognizing the C library functions, which significantly streamlined the analysis process. Analyzing the ransomware became notably easier and more intuitive with IDA, allowing for a more comprehensive understanding of its inner workings.   
 
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/02c24a8d-3f76-42d9-9b0a-6e82a08c868d)   
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/458b1f3c-572a-457d-bfc1-6e524e895db6)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/4c76e284-b07a-4116-90f3-fa1e215f4dfe)
+
+
+
+
