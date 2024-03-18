@@ -5,7 +5,8 @@
 
 # [ransomware1.zip](https://github.com/tolvumadur/Reverse-Engineering-Class/blob/main/Spring23/Samples/binaries/ransomware1.zip)
 ## Report and Decryption process
-The decryption of the files encrypted by ransomware1 works by xoring all the bytes in the file with the char '4'. After the XOR operation, this new bytes are written to a new file called secret.txt and the file is finally decrypted.
+The decryption process for files encrypted by ransomware1 involves XORing all the bytes in the encrypted file with the character '4'. After performing the XOR operation, the resulting bytes are written to a new file named "secret.txt". This file contains the decrypted data. The decryption script provided below automates this process. To use it, provide the path to the encrypted file as the input and specify the desired output filename. The script will then perform the decryption and save the decrypted content to the specified file.   
+
 ### Decryption program
 
 To make decrypt.py executable, type:
@@ -47,7 +48,10 @@ with open(infile, "rb") as inf:
 
 ## [ransomware2.zip](https://github.com/tolvumadur/Reverse-Engineering-Class/blob/main/Spring23/Samples/binaries/ransomware2.zip)
 ## Report and Decryption process
-The decryption of the files encrypted by ransomware1 works by xoring all the bytes in the file with the char '4'. After the XOR operation, this new bytes are written to a new file called secret.txt and the file is finally decrypted.
+The decryption process for files encrypted by ransomware2 involves XORing each byte of the encrypted file with a corresponding character from the string "1337". This process is achieved by iterating through each byte of the encrypted file and performing an XOR operation with the character from the "1337" string that corresponds to the current position. After this XOR operation, the resulting bytes are written to a new file specified by the user. The decryption script provided below automates this process, enabling users to decrypt files encrypted by ransomware2. To use the script, users need to provide the path to the encrypted file as input and specify the desired output filename. Upon execution, the script decrypts the file and saves the decrypted content to the specified file.
+Note the use of bytearray() to store the decrypted bytes before writing them to the output file. Also, ord() is used to get the ASCII value of each character in the key for XOR operation. Finally, the modulo operation (%) is used to loop over the key characters if the encrypted file is longer than the key.   
+
+
 ### Decryption program
 
 To make decrypt.py executable, type:
@@ -82,8 +86,9 @@ with open(infile, "rb") as inf:
         ouf.write(decrypted_contents)
 ````
 ### secret.txt
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/9bf8fcd3-66b8-4277-8323-a39735d55bca)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/c4d21dc6-932d-43db-9f02-a73be7454a03)
 
-### Screenshot of Ghidra inside decryption()
+
+### Screenshot of IDA inside decryption()
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/c13521ba-e254-4071-bce2-c9efba181b46)
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/969cb01e-5ddf-4925-9eae-54fa842037e3)
