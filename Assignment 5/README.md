@@ -46,7 +46,7 @@ with open(infile, "rb") as inf:
 
 
 
-## [ransomware2.zip](https://github.com/tolvumadur/Reverse-Engineering-Class/blob/main/Spring23/Samples/binaries/ransomware2.zip)
+# [ransomware2.zip](https://github.com/tolvumadur/Reverse-Engineering-Class/blob/main/Spring23/Samples/binaries/ransomware2.zip)
 ## Report and Decryption process
 The decryption process for files encrypted by ransomware2 involves XORing each byte of the encrypted file with a corresponding character from the string "1337". This process is achieved by iterating through each byte of the encrypted file and performing an XOR operation with the character from the "1337" string that corresponds to the current position. After this XOR operation, the resulting bytes are written to a new file specified by the user. The decryption script provided below automates this process, enabling users to decrypt files encrypted by ransomware2. To use the script, users need to provide the path to the encrypted file as input and specify the desired output filename. Upon execution, the script decrypts the file and saves the decrypted content to the specified file.
 Note the use of bytearray() to store the decrypted bytes before writing them to the output file. Also, ord() is used to get the ASCII value of each character in the key for XOR operation. Finally, the modulo operation (%) is used to loop over the key characters if the encrypted file is longer than the key.   
@@ -95,5 +95,38 @@ For this particular ransomware, I initially struggled to understand the decompil
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/02c24a8d-3f76-42d9-9b0a-6e82a08c868d)   
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/458b1f3c-572a-457d-bfc1-6e524e895db6)
 
+# Improved version of decryption tool
+This modified version of my previous decryption tools can decrypt both ransomware using the same tool. The way it works is that now it takes the Key of encryption as the third argument `"Usage: decryptV2.py INFILE OUTFILENAME KEY"`. So then for ransomare 1, the usage will be `./decryptV2.py secret.txt.pay_up secret.txt 4`. And for ransomware2 it will be `./decryptV2.py secret.txt.pay_up secret.txt 1337`.
 
+To make decryptV2.py executable, type:
+```bash
+chmod +x decryptV2.py
+```
+
+decryptionV2.py
+```python3
+#!/usr/bin/env python3
+
+import sys
+
+if len(sys.argv) != 4:
+    print("Usage: decryptV2.py INFILE OUTFILENAME KEY")
+    sys.exit(1)
+
+infile = sys.argv[1]
+outfile = sys.argv[2]
+key = sys.argv[3]
+
+with open(infile, "rb") as inf:
+    with open(outfile, "wb") as ouf:
+        contents = inf.read()
+        decrypted_contents = bytearray()
+
+        # XOR each byte with the corresponding character from the key
+        for i in range(len(contents)):
+            decrypted_byte = contents[i] ^ ord(key[i % len(key)])
+            decrypted_contents.append(decrypted_byte)
+
+        ouf.write(decrypted_contents)
+```
 
