@@ -28,7 +28,63 @@ keygen:
 ```
 #!/usr/bin/env python3
 
-print("This is the answer!")
+import random
+import string
+
+def generate_serial():
+    # Generate 11th and 9th characters satisfying condition
+    while True:
+        char_11 = random.choice(string.ascii_letters + string.digits)
+        char_9 = random.choice(string.ascii_letters + string.digits)
+        var1 = ord(char_11) ^ ord(char_9)
+        if 0 <= var1 < 10:
+            break
+
+    # Generate 14th and 6th characters satisfying condition
+    while True:
+        char_14 = random.choice(string.ascii_letters + string.digits)
+        char_6 = random.choice(string.ascii_letters + string.digits)
+        var2 = ord(char_14) ^ ord(char_6)
+        if 0 <= var2 < 10:
+            break
+
+    # Calculate characters based on conditions
+    var1 += 48
+    var2 += 48
+    char_1 = chr(var2)
+    char_4 = chr(var1)
+    char_16 = chr(var1)
+    char_19 = chr(var2)
+
+    # Generate 2nd, 3rd, 17th, and 18th characters satisfying conditions
+    while True:
+        char_3 = random.choice(string.ascii_letters + string.digits)
+        char_2 = random.choice(string.ascii_letters + string.digits)
+        char_17 = random.choice(string.ascii_letters + string.digits)
+        char_18 = random.choice(string.ascii_letters + string.digits)
+        if (ord(char_3) + ord(char_2) >= 171) and \
+           (ord(char_17) + ord(char_18) >= 171) and \
+           ((ord(char_3) + ord(char_2)) != (ord(char_17) + ord(char_18))):
+            break
+
+    # Generate other characters
+    char_5 = '-'
+    char_7 = random.choice(string.ascii_letters + string.digits)
+    char_8 = random.choice(string.ascii_letters + string.digits)
+    char_10 = '-'
+    char_12 = random.choice(string.ascii_letters + string.digits)
+    char_13 = random.choice(string.ascii_letters + string.digits)
+    char_15 = '-'
+
+    # Construct the serial
+    serial = char_1 + char_2 + char_3 + char_4 + char_5 + char_6 + char_7 + char_8 + char_9 + char_10 + \
+             char_11 + char_12 + char_13 + char_14 + char_15 + char_16 + char_17 + char_18 + char_19
+
+    return serial
+
+# Generate and print a serial
+print(generate_serial())
+
 ```
 
 
