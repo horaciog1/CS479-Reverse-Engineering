@@ -24,10 +24,28 @@ To solve this crackme, you need to __________________________.
 
 My solution is ____________________________. (If the crackme asks for a program, include your source code in a code block)
 
+keygen:
 ```
 #!/usr/bin/env python3
 
 print("This is the answer!")
+```
+
+
+#### How to run the keygen on Linux
+To run the keygen script, you will need to make it executable. To achieve that, you will need the following command, where "nameOfTheScript" is the name that you put to the file:
+
+```bash
+chmod +x nameOfTheScript.py
+```
+To run the crackme with the keygen, you will need:
+
+```bash
+./nameOfTheScript.py | xargs  ./control_flow_2
+```
+If you want to see the output that the keygen generates, you can use:
+```bash
+./nameOfTheScript.py
 ```
 
 
@@ -38,35 +56,3 @@ print("This is the answer!")
 3. The first one called `________` does ________. I can tell because ___________________.
 4. etc.
 5. Screenshots in here would be a nice touch -- especially if something is hard to describe in words. But images don't replace the need to explain what you did in enough detail that someone else could reproduce what you did.
-
-
-### Decryption program
-
-To make decrypt.py executable, type:
-```bash
-chmod +x decrypt.py
-```
-
-decrypt.py
-```python3
-#!/usr/bin/env python3
-
-import sys
-
-if (len(sys.argv)!=3):
-    print("Usage: decrypt.py INFILE OUTFILENAME")
-
-infile = sys.argv[1]
-outfile = sys.argv[2]
-key = ord('4')
-
-with open(infile, "rb") as inf:
-    with open(outfile, "wb") as ouf:
-
-        contents = inf.read()
-        
-        for b in contents:
-            ouf.write((b ^ key).to_bytes(1, "big"))
-
-
-````
