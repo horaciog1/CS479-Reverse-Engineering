@@ -25,7 +25,7 @@ To solve this crackme, you need to __________________________.
 My solution is ____________________________. (If the crackme asks for a program, include your source code in a code block)
 
 keygen:
-```
+```python3
 #!/usr/bin/env python3
 
 import random
