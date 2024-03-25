@@ -18,7 +18,7 @@ The password to extract each of these is "crackmes.de"
 [Crackme 5](https://crackmes.dreamhosters.com/users/seveb/crackme04/download/crackme04.tar.gz) (Make a program that can output valid serial numbers for crackme04, you get both a 32-bit and 64-bit version. You don't need to change any of the other crackmes to solve them, but you do need to patch this one to get it past the self-destruct instructions so it will actually ask for a serial number) 
 
 ## Report and Decryption process
-### Crackme 1 Solution (link/to/download/location):
+### Crackme 1 Solution ([download file](https://crackmes.dreamhosters.com/users/seveb/crackme05/download/crackme05.tar.gz)):
 
 To solve this crackme, you need to __________________________.
 
