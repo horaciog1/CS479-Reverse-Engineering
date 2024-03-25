@@ -20,9 +20,23 @@ The password to extract each of these is "crackmes.de"
 ## Report and Decryption process
 ### Crackme 1 Solution ([download file](https://crackmes.dreamhosters.com/users/seveb/crackme05/download/crackme05.tar.gz)):
 
-To solve this crackme, you need to __________________________.
+To solve this crackme, you need to generate a serial with the following requierements:
+- Serial must be 19 characters long
+- Serial can only have uppercase letters, lowercase letters, and numbers
+- Character 5th must be '-'
+- Character 10th must be '-'
+- Character 15th must be '-'
+- Characters 7th, 8th, 12th, 13th can be any ascii letter or digit
+- 0 <= char_11 XOR char_9 < 10
+- 0 <= char_14 XOR char_6 < 10
+- Character 4th must be equal to the ascii char ( (char_11 XOR char_9) + 48 )
+- Character 1st must be equal to the ascii char ( (char_14 XOR char_6) + 48 )
+- Character 16th must be equal to the ascii char ( (char_11 XOR char_9) + 48 )
+- Character 19th must be equal to the ascii char ( (char_14 XOR char_6) + 48 )
+- Using the decimal numbers from the ascii chars: `(char_3 + char_2 >= 171)` and `(char_17 + char_18 >= 171)` but `(char_3 + char_2) !=  (char_17 + char_18)`
 
-My solution is ____________________________. (If the crackme asks for a program, include your source code in a code block)
+
+My solution is python script that can output different serials that follow the requierements of the crackme.
 
 keygen:
 ```python3
@@ -92,23 +106,32 @@ print(generate_serial())
 To run the keygen script, you will need to make it executable. To achieve that, you will need the following command, where "nameOfTheScript" is the name that you put to the file:
 
 ```bash
-chmod +x nameOfTheScript.py
+chmod +x serial_keygen.py
 ```
 To run the crackme with the keygen, you will need:
 
 ```bash
-./nameOfTheScript.py | xargs  ./control_flow_2
+./serial_keygen.py | xargs ./crackme05_64bit
 ```
 If you want to see the output that the keygen generates, you can use:
 ```bash
-./nameOfTheScript.py
+./serial_keygen.py
 ```
 
 
-### How I did it using Ghidra (and any other tools you used like gdb):
+### How I did it using Ghidra:
 
 1. I opened the crackme in Ghidra
-2. I found the `main` function and noticed three function calls.
-3. The first one called `________` does ________. I can tell because ___________________.
-4. etc.
-5. Screenshots in here would be a nice touch -- especially if something is hard to describe in words. But images don't replace the need to explain what you did in enough detail that someone else could reproduce what you did.
+2. I found the `main` function and noticed five interesting function calls called: `rock`, `paper`, `scissors`, `cracker`, and `decraycray`. The first four functions called another function in case the requierements of the serial were not meet named `bomb` which prints a bomb and calls another function called `decraycray` which prints a phrase, and ends the program.
+3. The first one called `rock` checks that the serial is 19 characters long, does not include other characters that are not letters or digits (with an exception of `-`). I can tell because of the if functions and the paramaters that they are checking. 
+4. The second one, `paper`, checks the conditions for the 11th, 9th, 14th, 6th, 4th, 16th, 19th, and 1st characters. If these conditions arent met it calls bomb to end the program. I can tell that once again because of the if statements and the conditions those if statements are checking.
+5. The third one, `scissors`, checks the conditions for the 3rd, 2nd, 18th, and 17th. If these conditions arent met it calls bomb to end the program. I can tell that once again because of the if statements and the conditions those if statements are checking.
+6. The fourth one, `cracker`, checks the conditions for the 5th, 10th, and 15th characters, which makes sure those are `-`. If these conditions arent met it calls bomb to end the program. I can tell that once again because of the if statements and the conditions those if statements are checking.
+7. 
+main function
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/bbdce8e6-c67a-43ec-98ae-eccbbe4f53bd)   
+
+
+
+
+
