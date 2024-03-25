@@ -128,8 +128,34 @@ If you want to see the output that the keygen generates, you can use:
 5. The third one, `scissors`, checks the conditions for the 3rd, 2nd, 18th, and 17th. If these conditions arent met it calls bomb to end the program. I can tell that once again because of the if statements and the conditions those if statements are checking.
 6. The fourth one, `cracker`, checks the conditions for the 5th, 10th, and 15th characters, which makes sure those are `-`. If these conditions arent met it calls bomb to end the program. I can tell that once again because of the if statements and the conditions those if statements are checking.
 7. 
-main function
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/bbdce8e6-c67a-43ec-98ae-eccbbe4f53bd)   
+main function   
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/bbdce8e6-c67a-43ec-98ae-eccbbe4f53bd)
+
+
+rock function   
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/a4022d24-9fbb-4e32-8929-4042cf070ec7)    
+
+
+paper function   
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/8481de00-67d5-4bc0-b13e-d2ff6b1f8a8e)    
+
+
+scissors function    
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/adfddc94-586c-4752-9d9b-ac175067780e)   
+
+
+cracker function    
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/c4a8c8e4-104e-41b3-943e-5d373399596e)    
+
+
+decraycray function    
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/f4b87c80-6378-4035-a435-406e44f75382)    
+
+
+bomb function    
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/0a90b17b-33f2-445f-ae99-6b4276acb3d5)   
+
+
 
 
 
