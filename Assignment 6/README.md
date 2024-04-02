@@ -156,6 +156,30 @@ bomb function
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/0a90b17b-33f2-445f-ae99-6b4276acb3d5)   
 
 
+<br>
+
+### Crackme 4 Solution ([download](https://crackmes.dreamhosters.com/users/hmx0101/decryptme_1/download/Decryptme%231.zip)):
+
+To solve this crackme, you need to __________________________.
+
+My solution is ____________________________. (If the crackme asks for a program, include your source code in a code block)
+
+```
+#!/usr/bin/env python3
+
+print("This is the answer!")
+```
+
+
+### How I did it using Ghidra (and any other tools you used like gdb):
+
+1. I opened the crackme in Ghidra
+2. I found the `main` function and noticed three function calls.
+3. The first one called `________` does ________. I can tell because ___________________.
+4. etc.
+5. Screenshots in here would be a nice touch -- especially if something is hard to describe in words. But images don't replace the need to explain what you did in enough detail that someone else could reproduce what you did.
+
+
 
 
 
