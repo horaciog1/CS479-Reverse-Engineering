@@ -185,12 +185,15 @@ for keys in range(0,256):
 
 ### How I did it using Ghidra (and any other tools you used like gdb):
 
-1. I opened the crackme in Ghidra
-2. I found the `main` function and noticed three function calls.
-3. The first one called `________` does ________. I can tell because ___________________.
-4. etc.
-5. Screenshots in here would be a nice touch -- especially if something is hard to describe in words. But images don't replace the need to explain what you did in enough detail that someone else could reproduce what you did.
+1. I opened the crackme in Ghidra and in IDA. IDA does a better job at recognizing the functions of programs and import them. So I used both, side-by-side, to analyze the crackme. I really like the pseudocode and interface from Ghidra, but IDA does a great job with the functions.
+2. I found an "OK!" string which was associated with the windows, so I decided it was a good place to start. I use the flow diagram to analyze how the program was behaving.
+3. I went inside all the functions until I found one subroutine that caught my attention because it had an interesting pattern with a lot of math operations that for me seem that someone was using obfuscation to hide something in there.
+4. The subroutine with the math operations was at `0x00013E1C`. And after examining it for a long time, and seeing where was this subroutine/function called, I decided to name it `decryption`.
+5. The ciphertext was passed to the decryption function using the eax register and it can be seen at 0x00014019.
+6. Then the decryption occurs, where each character/byte is put into a series of operations:  `( ( (char - 0x2644) XOR 0x0dead) + 10) - key_Or_User_input`, then later all that is XOR with the key, and finally that whole number is bitwise AND with 0xFF and concatenated with an empty string that will start we will start filling with the other decrypted characters.
+7. Unfortunately, my computer start crashing when I had important advances, and I could take a lot of pictures since a loose a big part of my unsaved progress.
 
+![WhatsApp Image 2024-04-02 at 1 47 52 AM](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/57bede2d-9a7f-4805-819f-5e0bf783341b)
 
 
 
