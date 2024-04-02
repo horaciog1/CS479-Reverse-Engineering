@@ -160,9 +160,17 @@ bomb function
 
 ### Crackme 4 Solution ([download](https://crackmes.dreamhosters.com/users/hmx0101/decryptme_1/download/Decryptme%231.zip)):
 
-To solve this crackme, you need to enter the right key to decrypt the message. A windows appears after you enter the key and outputs a message.
-My solution is a bruteforce attack on the keys until the right message appears. After inputting keys by hand, I figured out that the message was most likely to be "Well Done!, Congratulations!!!". This was my hypothesis after entering keys that improve the output every time I tried a new key.
-I decided it was going to take to much time to brute force the message by hand, so I decided to reverse engineer the decryptme to se if I could find the decryption process and ciphertext. After finding both, the ciphertext and decryption process, i made a python script to brute force and output the different messages with different keys. The ciphertext was 30 Bytes long which is the same size as the string. These are the bytes: `0x74, 0x66, 0x6f, 0x6f, 0xc3, 0x47, 0x6c, 0x6d, 0x66, 0xc2, 0xaf, 0xc3, 0x60, 0x6c, 0x6d, 0x64, 0x71, 0x82, 0x17, 0x16, 0x6f, 0x82, 0x17, 0x6a, 0x6c, 0x6d, 0x70, 0xc2, 0xc2, 0xc2`. Assuming each byte is a character, then for example 0x74 is a byte, which is the same as 8 bits, so to bruteforce it we would need 2^8 = 256 different keys. Thus we want to try using the numbers from 0 to 255 which are all the possible keys. The key that worked in that range are `126` and `254`, I noticed there are other numbers that yield the same result. The difference between 254 and 126 is 128; if you multiply every number by 128, the result of the multiplication will also serve as a key. For example `2x128 = 254`, `3x128 = 384`, `4x128 = 512`, `5x128 = 640`, `6x128 = 768`, and so on.
+To crack this particular crackme, one must input the correct key to decipher the encrypted message. Upon entering a key, a window pops up displaying the output message.
+
+Initially, I attempted to solve this challenge manually by entering keys and observing the output message. Through this trial-and-error process, I noticed a pattern in the output, leading me to hypothesize that the message was likely "Well Done!, Congratulations!!!".
+
+Recognizing the impracticality of manually brute-forcing the message, I decided to reverse engineer the crackme to uncover both the ciphertext and the decryption process. After successfully finding both elements, I developed a Python script to systematically test different keys and output the resulting messages.
+
+The ciphertext provided consists of 30 bytes, matching the length of the expected message. The hexadecimal representation of the ciphertext is as follows: 0x74, 0x66, 0x6f, 0x6f, 0xc3, 0x47, 0x6c, 0x6d, 0x66, 0xc2, 0xaf, 0xc3, 0x60, 0x6c, 0x6d, 0x64, 0x71, 0x82, 0x17, 0x16, 0x6f, 0x82, 0x17, 0x6a, 0x6c, 0x6d, 0x70, 0xc2, 0xc2, 0xc2.
+
+Each byte in the ciphertext corresponds to a character in the decrypted message. For instance, 0x74 represents a byte, equivalent to 8 bits. To brute force the decryption, we need to test 256 different keys (2^8 = 256). Therefore, we iterate through the range of numbers from 0 to 255 to test all possible keys.
+
+Interestingly, after testing various keys, it became evident that certain keys yielded the same decrypted message. Notably, the difference between the keys 254 and 126 is 128. Further investigation revealed that multiplying any number by 128 would result in another valid key. For instance, 2 x 128 = 254, 3 x 128 = 384, 4 x 128 = 512, 5 x 128 = 640, 6 x 128 = 768, and so forth. This pattern demonstrates a shortcut in the brute-force process, significantly reducing the number of keys to test.
 
 ```python3
 #!/usr/bin/env python3
@@ -183,17 +191,33 @@ for keys in range(0,256):
 ```
 
 
-### How I did it using Ghidra (and any other tools you used like gdb):
+### How I did it using Ghidra:
 
-1. I opened the crackme in Ghidra and in IDA. IDA does a better job at recognizing the functions of programs and import them. So I used both, side-by-side, to analyze the crackme. I really like the pseudocode and interface from Ghidra, but IDA does a great job with the functions.
-2. I found an "OK!" string which was associated with the windows, so I decided it was a good place to start. I use the flow diagram to analyze how the program was behaving.
-3. I went inside all the functions until I found one subroutine that caught my attention because it had an interesting pattern with a lot of math operations that for me seem that someone was using obfuscation to hide something in there.
-4. The subroutine with the math operations was at `0x00013E1C`. And after examining it for a long time, and seeing where was this subroutine/function called, I decided to name it `decryption`.
-5. The ciphertext was passed to the decryption function using the eax register and it can be seen at 0x00014019.
-6. Then the decryption occurs, where each character/byte is put into a series of operations:  `( ( (char - 0x2644) XOR 0x0dead) + 10) - key_Or_User_input`, then later all that is XOR with the key, and finally that whole number is bitwise AND with 0xFF and concatenated with an empty string that will start we will start filling with the other decrypted characters.
-7. Unfortunately, my computer start crashing when I had important advances, and I could take a lot of pictures since a loose a big part of my unsaved progress.
+1. I opened the crackme in Ghidra and in IDA. IDA does a better job at recognizing the functions of programs and import them. So I used both, side-by-side, to analyze the crackme. I really like the pseudocode and interface from Ghidra, but IDA does a great job with the functions. Ghidra offers a very user-friendly interface and insightful pseudocode, while IDA excels in recognizing program functions and imports
+
+2. My investigation began by identifying an "OK!" string associated with the windows, serving as a promising starting point. Employing flow diagrams, I meticulously dissected the program's behavior to gain deeper insights.
+
+3. Delving into various functions, I encountered a particular subroutine at 0x00013E1C that piqued my interest. This subroutine exhibited a complex pattern of mathematical operations, suggesting potential obfuscation to conceal critical information.
+
+4. After extensive examination and tracing its invocation points, I aptly named this subroutine "decryption."
+
+5. The ciphertext was supplied to the decryption function via the eax register, as evidenced at address 0x00014019.
+
+6. Within the decryption process, each character/byte underwent a sequence of operations: (((char - 0x2644) XOR 0x0dead) + 10) - key_Or_User_input, followed by XOR with the key, and finally bitwise AND with 0xFF. Subsequently, the resulting number was concatenated with an empty string, forming the basis for assembling the decrypted characters.
+
+7. Regrettably, my progress was impeded by computer crashes, resulting in the loss of significant unsaved data. Despite this setback, I persevered in reconstructing my findings and advancing my analysis.
+
+
 
 ![WhatsApp Image 2024-04-02 at 1 47 52 AM](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/57bede2d-9a7f-4805-819f-5e0bf783341b)
+
+<img width="357" alt="Screenshot 2024-04-02 at 1 51 07 AM" src="https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/e7d760ca-b254-414e-8c8f-c4ca09120afb">
+<br>
+<img width="388" alt="Screenshot 2024-04-02 at 1 50 46 AM" src="https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/92b9d9b9-20af-46f6-95be-bdc1d20c4e94">
+<br>
+<img width="485" alt="Screenshot 2024-04-02 at 1 50 15 AM" src="https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/82d030b2-647b-4010-b3e8-895d956bf4e1">
+<br>
+<img width="794" alt="Screenshot 2024-04-02 at 1 49 51 AM" src="https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/e188cc72-c67c-47f4-9eaa-74eafae78692">
 
 
 
