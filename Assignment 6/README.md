@@ -160,9 +160,10 @@ bomb function
 
 ### Crackme 4 Solution ([download](https://crackmes.dreamhosters.com/users/hmx0101/decryptme_1/download/Decryptme%231.zip)):
 
-To solve this crackme, you need to __________________________.
-
-My solution is ____________________________. (If the crackme asks for a program, include your source code in a code block)
+To solve this crackme, you need to enter the right key to decrypt the message. A windows appears after you enter the key and outputs a message.
+My solution is a bruteforce attack on the keys until the right message appears. After inputting keys by hand, I figured out that the message was most likely to be "Well Done!, Congratulations!!!". This was my hypothesis after entering keys that improve the output every time I tried a new key.
+I decided it was going to take to much time to brute force the message by hand, so I decided to reverse engineer the decryptme to se if I could find the decryption process and ciphertext. After finding both, the ciphertext and decryption process, i made a python script to brute force and output the different messages with different keys. The ciphertext was 30 Bytes long which is the same size as the string. These are the bytes: `0x74,0x66,0x6f,0x6f,0xc3,0x47,0x6c,0x6d,0x66,0xc2,
+0xaf,0xc3,0x60,0x6c,0x6d,0x64,0x71,0x82,0x17,0x16,0x6f,0x82,0x17,0x6a,0x6c,0x6d,0x70,0xc2,0xc2,0xc2`. Assuming each byte is a character, then for example 0x74 is a byte, which is the same as 8 bits, so to bruteforce it we would need 2^8 = 256 different keys. Thus we want to try using the numbers from 0 to 255 which are all the possible keys.
 
 ```
 #!/usr/bin/env python3
