@@ -49,6 +49,8 @@ We will take a snapshot of the registry before running the RAT and then we will 
 - Does this appear to be for persistence, or something else?
 
 - What clues (Indicators of Compromise) could someone look for in the registry to detect an NjRAT infection?
+  > - Registry Modifications: Check for suspicious modifications to the Windows registry, such as the creation of new registry keys or entries related to NjRAT persistence mechanisms.
+
 
 ### File functionality of RegShot
 RegShot allows you to take snapshots of directories as well. So then we will identify at least one file or directory created or altered by NjRAT when it runs. You may need to revert to your pre-RAT VM snapshot to check several directories to find a change.
@@ -60,7 +62,15 @@ RegShot allows you to take snapshots of directories as well. So then we will ide
 - Does this appear to be for persistence, or something else?
   > I noticed that on the startup apps, there were added a couple of executables that werent there before executing the malware. (this is mentioned at the end of the doc in Additional notes)
   > I assumed the malware did this for persistance whis refers to the ability of the malicious software to maintain its presence on an infected system over time, even after system reboots or attempts to remove it. Essentially, it's the malware's ability to "persist" or remain active on the compromised system to ensure continued control or access for the attacker. These mechanisms typically involve making changes to the system's configuration, startup routines, or other areas to ensure that the malware is executed automatically each time the system boots up or specific conditions are met.
+
 - What clues (Indicators of Compromise) could someone look for in their filesystem to detect this NjRAT infection?
+  > Some clues or indicators of compromise in the filesystem that someone could look for to detect an NjRAT infection include:
+  > - Newly Created Files: Look for any new files or directories created on the system, especially in commonly targeted locations such as the root directory of the Local C disk, as mentioned in the analysis.
+  > - Unusual File Names: Identify files with suspicious or random names, particularly if they have executable file extensions (e.g., .exe, .dll) or are located in system-critical directories.
+  > - Changes to Startup Apps: Check for alterations to the list of startup applications or services, as malware often adds itself to startup routines to ensure persistence across system reboots. A good place to start looking is the startup apps tab in task manager
+  > - File System Changes: Look for changes to the file system, such as the creation of new files or directories associated with NjRAT, especially in common locations used by malware for persistence, such as %APPDATA% or %TEMP%.
+  > - Anomalous Behavior: Watch for any other anomalous behavior on the infected machine, such as unexpected system crashes, slowdowns, or unusual user activity, which could indicate the presence of malware.
+  > - Process Activity: Monitor process activity on the infected machine for any processes associated with NjRAT. This could include unusual or unauthorized processes running in the background, especially those with obfuscated or random names.
 
 ## FakeNet
 FakeNet is an open-source tool primarily used for dynamic malware analysis and network traffic analysis. It is designed to simulate a network environment, allowing researchers and analysts to observe how malware interacts with the network without exposing real systems to potential harm.
@@ -68,26 +78,23 @@ FakeNet is an open-source tool primarily used for dynamic malware analysis and n
 You may need to set up a network interface on your VM. Most hypervisors will allow you to create a non-Internet-connected interface. FakeNet-NG will show a live feed of network activity when it is running properly, and you should take note of what Windows is already doing in the background.
 
 After running FakeNet, I took a picture of some of the processes that were already running. I waited a couple of minutes before taking a snapshot in RegShot. I notice a couple of request to Microsoft Servers and then after tooking the snapshot of directories and registry I decided that it was time to run the malware.
-- ***What did NjRAT do on the network?***
-  > NjRAT started requesting a DNS server for the domain "zaaptoo.zapto.org" every 25 seconds. I could notice any other activity on the network besides this DNS request.
+- What did NjRAT do on the network?
+  > NjRAT started requesting a DNS server for the domain "zaaptoo.zapto.org" every 25 seconds. I could notice any other activity on the network besides this DNS request.   
+
 - What DNS name(s) did it look up?
-  > The DNS was "zaaptoo.zapto.org"`
+  > The DNS was "zaaptoo.zapto.org"`   
+
 - Investigate that DNS name -- is this a known malicious domain, or an attacker abusing a legitimate service? Why do you think so?
   > zaaptoo.zapto.org appears to be a domain name registered with the "zapto.org" domain service. Zapto.org is a dynamic DNS service that allows users to create free subdomains under the "zapto.org" domain for remote access to their computers or services.
   > Dynamic DNS services like Zapto.org are commonly used for legitimate purposes, such as accessing home networks remotely or hosting personal websites on a dynamic IP address. However, they can also be abused by malware authors and cybercriminals to establish      > command-and-control (C2) infrastructure for malicious activities.
-  > The domain and top-level domain zapto.org are perfectly fine but it has a bad reputition because of its use in illegal activities. I believe that an attacker is abusing this legitimate service to register their subdomain. After searching more about this subdomain and domain all together we get all kind of information related to the NjRAT.
+  > The domain and top-level domain zapto.org are perfectly fine but it has a bad reputition because of its use in illegal activities. I believe that an attacker is abusing this legitimate service to register their subdomain. After searching more about this subdomain and domain all together we get all kind of information related to the NjRAT.   
+
 - What indicators of compromise could a network administrator look for to identify if any of their machines are infected with this same malware?
   > Network administrators can look for the following indicators of compromise to identify if any of their machines are infected with the NjRAT malware:
   > - DNS Requests: Monitor network traffic for repeated DNS requests to the domain "zaaptoo.zapto.org" or any other suspicious domains associated with NjRAT. This request repeats every 25 seconds.
   > - Unusual Network Activity: Look for unusual or suspicious network activity, such as frequent outbound connections to unknown or suspicious IP addresses, especially if they occur at regular intervals.
   > - Outbound Connections: Analyze outbound connections from the infected machine to known NjRAT command-and-control (C2) servers or other malicious domains associated with NjRAT activity.
-  > - Process Activity: Monitor process activity on the infected machine for any processes associated with NjRAT. This could include unusual or unauthorized processes running in the background, especially those with obfuscated or random names.
-  > - Registry Modifications: Check for suspicious modifications to the Windows registry, such as the creation of new registry keys or entries related to NjRAT persistence mechanisms.
-  > - File System Changes: Look for changes to the file system, such as the creation of new files or directories associated with NjRAT, especially in common locations used by malware for persistence, such as %APPDATA% or %TEMP%.
-  > - Anti-Virus Alerts: Pay attention to any alerts or warnings from anti-virus or endpoint security software indicating the presence of NjRAT or related malware on the infected machine.
   > - Anomalous Behavior: Watch for any other anomalous behavior on the infected machine, such as unexpected system crashes, slowdowns, or unusual user activity, which could indicate the presence of malware.
-
-  > By monitoring for these indicators of compromise, network administrators can detect and respond to NjRAT infections promptly, mitigating the potential damage and preventing further spread within their network. Additionally, implementing robust security measures, such as endpoint protection, network segmentation, and user education, can help prevent NjRAT infections and other malware threats.
 
 
 ## Aditional Notes
@@ -99,4 +106,6 @@ I decided to reboot the VM without restoring the snapshot to see how the malware
 I went into the task manager but I couldnt find any suspicious processes, but when I went into the startup apps I found a executable with a strange name which appears to be md5 (just a supposition), and I also found windows.exe executables that should not be there. Searching in Google, I found that this is one of the things that this malware sets up.
 
 ![PXL_20240409_072506132](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/38a25399-018f-4574-8823-bfc37af6c46b)
+
+It is worth mentioning that my laptop started to crash and be very slow when I started the RAT.
 
