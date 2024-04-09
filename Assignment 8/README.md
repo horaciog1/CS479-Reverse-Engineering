@@ -98,14 +98,18 @@ After running FakeNet, I took a picture of some of the processes that were alrea
 
 
 ## Aditional Notes
+This is the task manager processes right after running the malware:   
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/a1682fa0-2291-4975-9004-f8731943d7e6)   
+
+
 I decided to reboot the VM without restoring the snapshot to see how the malware behaves. Once the machine booted back on, I started FakeNet and I noticed it immediately started catching DNS request to zaaptoo.zapto.org as shown on the next picture:   
 ![PXL_20240409_072225489~2](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/1c73347d-6a6d-4d1a-b737-4a83f25f1dde)   
 
 <br>
 
-I went into the task manager but I couldnt find any suspicious processes, but when I went into the startup apps I found a executable with a strange name which appears to be md5 (just a supposition), and I also found windows.exe executables that should not be there. Searching in Google, I found that this is one of the things that this malware sets up.
+I went into the task manager but I couldnt find any suspicious processes like in the beggining, but when I went into the startup apps I found an executable with a strange name which appears to be md5 (just a supposition), and I also found windows.exe executables that should not be there. Searching in Google, I found that this is one of the things that this malware sets up.
 
 ![PXL_20240409_072506132](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/38a25399-018f-4574-8823-bfc37af6c46b)
 
-It is worth mentioning that my laptop started to crash and be very slow when I started the RAT.
+It is worth mentioning that my laptop started to crash and became very slow when I started the RAT.
 
