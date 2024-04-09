@@ -43,15 +43,23 @@ RegShot is used to take a snapshot of the registry in Windows, a fundamental art
 We will take a snapshot of the registry before running the RAT and then we will run the RAT and take another snapshot, and thus compare both snapshots using RegShot to see what has been changed.
 
 - What registry keys changed?
+  
 - What was added?
+
 - Does this appear to be for persistence, or something else?
+
 - What clues (Indicators of Compromise) could someone look for in the registry to detect an NjRAT infection?
 
 ### File functionality of RegShot
 RegShot allows you to take snapshots of directories as well. So then we will identify at least one file or directory created or altered by NjRAT when it runs. You may need to revert to your pre-RAT VM snapshot to check several directories to find a change.
 
 - What files or directories did you see changed?
+  > Just by iterating trough the directories, I found that it dropped a bunch of different files in Local C disk root directory.
+  > ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/6e97dd53-3f67-49c3-a311-f580248e9aab)
+  
 - Does this appear to be for persistence, or something else?
+  > I noticed that on the startup apps, there were added a couple of executables that werent there before executing the malware. (this is mentioned at the end of the doc in Additional notes)
+  > I assumed the malware did this for persistance whis refers to the ability of the malicious software to maintain its presence on an infected system over time, even after system reboots or attempts to remove it. Essentially, it's the malware's ability to "persist" or remain active on the compromised system to ensure continued control or access for the attacker. These mechanisms typically involve making changes to the system's configuration, startup routines, or other areas to ensure that the malware is executed automatically each time the system boots up or specific conditions are met.
 - What clues (Indicators of Compromise) could someone look for in their filesystem to detect this NjRAT infection?
 
 ## FakeNet
@@ -84,4 +92,11 @@ After running FakeNet, I took a picture of some of the processes that were alrea
 
 ## Aditional Notes
 I decided to reboot the VM without restoring the snapshot to see how the malware behaves. Once the machine booted back on, I started FakeNet and I noticed it immediately started catching DNS request to zaaptoo.zapto.org as shown on the next picture:   
-![PXL_20240409_072225489~2](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/1c73347d-6a6d-4d1a-b737-4a83f25f1dde)
+![PXL_20240409_072225489~2](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/1c73347d-6a6d-4d1a-b737-4a83f25f1dde)   
+
+<br>
+
+I went into the task manager but I couldnt find any suspicious processes, but when I went into the startup apps I found a executable with a strange name which appears to be md5 (just a supposition), and I also found windows.exe executables that should not be there. Searching in Google, I found that this is one of the things that this malware sets up.
+
+![PXL_20240409_072506132](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/38a25399-018f-4574-8823-bfc37af6c46b)
+
