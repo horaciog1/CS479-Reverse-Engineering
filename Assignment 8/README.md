@@ -118,10 +118,10 @@ RegShot allows you to take snapshots of directories as well. So then we will ide
   > Just by iterating trough the directories, I found that it dropped a bunch of different files in Local C disk root directory.
   > ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/6e97dd53-3f67-49c3-a311-f580248e9aab)   
   > It deleted 16 files, modified the attributes of 29, and added 8 new files.   
-  > njRAT.exe | C:\njq8.exe | Executable   
-  > windows.exe | C:\Users\horac\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ecc7c8c51c0850c1ec247c7fd3602f20.exe | Executable   
-  > njq8.exe | C:\Users\horac\AppData\Local\Temp\windows.exe | Executable   
-  > njRAT.exe | C:\njRAT.exe | Executable   
+  > - njRAT.exe | C:\njq8.exe | Executable   
+  > - windows.exe | C:\Users\horac\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ecc7c8c51c0850c1ec247c7fd3602f20.exe | Executable   
+  > - njq8.exe | C:\Users\horac\AppData\Local\Temp\windows.exe | Executable   
+  > - njRAT.exe | C:\njRAT.exe | Executable   
   
 - Does this appear to be for persistence, or something else?
   > I noticed that on the startup apps, there were added a couple of executables that werent there before executing the malware. (this is mentioned at the end of the doc in Additional notes)
@@ -176,4 +176,11 @@ I went into the task manager but I couldnt find any suspicious processes like in
 ![PXL_20240409_072506132](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/38a25399-018f-4574-8823-bfc37af6c46b)
 
 It is worth mentioning that my laptop started to crash and became very slow when I started the RAT.
+
+Some of the things that changed:
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/0c031dff-8314-4ada-9350-605e24d276ca)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/7a06287a-9833-4d3f-8d47-63bdc8aee4c1)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/4cd4c619-5dde-4390-902e-1b2744793d8c)
+
+
 
