@@ -12,11 +12,16 @@ NJRAT gained notoriety for its widespread usage in cyber attacks and its ability
 
 According to the site [Checkpoint.com](https://www.checkpoint.com/es/cyber-hub/threat-prevention/what-is-malware/what-is-njrat-malware/) NjRAT was first seen in 2012, and was mainly targeting government agencies and organizations in the Middle East. As mentioned previously, this RAT has the ability to record keystrokes, use the target's camera, stealing passwords stored in browsers, uploading and downloading files (dropper), running files (launcher), performing process and file manipulations, change the registry, and remot accessing the target's desktop. This website also mentions that the malware uses different techniques to evade detection in an infected system. For example, this malware disguises as a "critical process", which makes it less likely to be eliminated by the users because of their fear to leave their system unusable. It also actively fights back deactivating the terminal security software and detecting if it being executed on a virtualized environment (VM), which makes it harder for analysts to investigate. According to [Wikipedia](https://en.wikipedia.org/wiki/NjRAT)this malware was made by a hacking organization from different countries called M38dHhM. It is believe that it was written by arabic speakers.
 
-According to [Any.run](https://any.run/malware-trends/njrat) this malware was formaly seen in 1 January, 2013 and last seen 9 April, 2024; being this one of the most popular malware in the world. Newer version of the malware are also refered as `Njw0rm`. Here are some of the places where it has been recently seen: ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/e73c2379-c020-47ef-bf2c-d0bb06898223). This site believes that the creators of njRAT are members of a hacker community named Sparclyheason. In 2014, following a large malicious campaign, Microsoft shut down four million websites in an effort to filter traffic going through no-ip.com domains. From another perspective, [welivesecurity.com](https://www.welivesecurity.com/la-es/2021/09/29/que-es-njrat-troyano-acceso-remoto-utilizado-cibercriminales/) thinks that Njw0rm is a variant of NjRAT which was released by the same author years later. Njw0rm adds the ability to spread itself trough USB and replicate, something that older verions of NjRAT cant accomplish. The truth is that NjRAT functions as a template for cybercriminals to adapt the malware for their neccesities.
+According to [Any.run](https://any.run/malware-trends/njrat) this malware was formaly seen in 1 January, 2013 and last seen 9 April, 2024; being this one of the most popular malware in the world. Newer version of the malware are also refered as `Njw0rm`. Here are some of the places where it has been recently seen:    
+
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/e73c2379-c020-47ef-bf2c-d0bb06898223)   
+
+This site believes that the creators of njRAT are members of a hacker community named Sparclyheason. In 2014, following a large malicious campaign, Microsoft shut down four million websites in an effort to filter traffic going through no-ip.com domains. From another perspective, [welivesecurity.com](https://www.welivesecurity.com/la-es/2021/09/29/que-es-njrat-troyano-acceso-remoto-utilizado-cibercriminales/) thinks that Njw0rm is a variant of NjRAT which was released by the same author years later. Njw0rm adds the ability to spread itself trough USB and replicate, something that older verions of NjRAT cant accomplish. The truth is that NjRAT functions as a template for cybercriminals to adapt the malware for their neccesities.
 
 I have found an [Ethical Hacking Lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/6-Malware/1-Using-njRAT.md) by Samsar4 where he shows the features of the malware to control and infect computers. Its simplicity is absurd, this is the perfect malware for "script kiddies".
 
-Here are some pictures from Samsar4 lab where he was testing the malware interface and functionality:
+Here are some pictures from [Samsar4 lab](https://github.com/Samsar4/Ethical-Hacking-Labs/blob/master/6-Malware/1-Using-njRAT.md) where he was testing the malware interface and functionality (Create an Executable Server with njRAT, Manipulate Files on Target machine, Manage the Processes, Manage the Connections, Manage the Registry, Launch a Remote Shell, Run Files, Launch a Remote Desktop Connection, and Perform Key Logging.):   
+
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/4e05212d-65e5-4eb1-84fa-937590cc816d)
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/c0ff9362-61c3-448e-8ff8-f410b22b1e08)
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/b1933732-0409-4fe9-a117-c57c78695a0f)
@@ -28,8 +33,8 @@ Here are some pictures from Samsar4 lab where he was testing the malware interfa
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/4c23bc5a-a1c3-4f8a-bf21-44b3658022ff)
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/25a8ae6a-0536-44f1-835d-80928cb27359)
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/706cbd1c-9f83-4340-b092-1982d58719c9)
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/1791b256-4927-49e5-970d-db07ead79c5a)
-All rights reserved to [Samsar4](https://github.com/Samsar4)   
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/1791b256-4927-49e5-970d-db07ead79c5a)   
+*All rights and credits reserved to [Samsar4](https://github.com/Samsar4)*
 
 
 
@@ -54,8 +59,29 @@ FakeNet is an open-source tool primarily used for dynamic malware analysis and n
 
 You may need to set up a network interface on your VM. Most hypervisors will allow you to create a non-Internet-connected interface. FakeNet-NG will show a live feed of network activity when it is running properly, and you should take note of what Windows is already doing in the background.
 
-**Note in your report the answers to these questions:** 
-- What did NjRAT do on the network?
+After running FakeNet, I took a picture of some of the processes that were already running. I waited a couple of minutes before taking a snapshot in RegShot. I notice a couple of request to Microsoft Servers and then after tooking the snapshot of directories and registry I decided that it was time to run the malware.
+- ***What did NjRAT do on the network?***
+  > NjRAT started requesting a DNS server for the domain "zaaptoo.zapto.org" every 25 seconds. I could notice any other activity on the network besides this DNS request.
 - What DNS name(s) did it look up?
+  > The DNS was "zaaptoo.zapto.org"`
 - Investigate that DNS name -- is this a known malicious domain, or an attacker abusing a legitimate service? Why do you think so?
+  > zaaptoo.zapto.org appears to be a domain name registered with the "zapto.org" domain service. Zapto.org is a dynamic DNS service that allows users to create free subdomains under the "zapto.org" domain for remote access to their computers or services.
+  > Dynamic DNS services like Zapto.org are commonly used for legitimate purposes, such as accessing home networks remotely or hosting personal websites on a dynamic IP address. However, they can also be abused by malware authors and cybercriminals to establish      > command-and-control (C2) infrastructure for malicious activities.
+  > The domain and top-level domain zapto.org are perfectly fine but it has a bad reputition because of its use in illegal activities. I believe that an attacker is abusing this legitimate service to register their subdomain. After searching more about this subdomain and domain all together we get all kind of information related to the NjRAT.
 - What indicators of compromise could a network administrator look for to identify if any of their machines are infected with this same malware?
+  > Network administrators can look for the following indicators of compromise to identify if any of their machines are infected with the NjRAT malware:
+  > - DNS Requests: Monitor network traffic for repeated DNS requests to the domain "zaaptoo.zapto.org" or any other suspicious domains associated with NjRAT. This request repeats every 25 seconds.
+  > - Unusual Network Activity: Look for unusual or suspicious network activity, such as frequent outbound connections to unknown or suspicious IP addresses, especially if they occur at regular intervals.
+  > - Outbound Connections: Analyze outbound connections from the infected machine to known NjRAT command-and-control (C2) servers or other malicious domains associated with NjRAT activity.
+  > - Process Activity: Monitor process activity on the infected machine for any processes associated with NjRAT. This could include unusual or unauthorized processes running in the background, especially those with obfuscated or random names.
+  > - Registry Modifications: Check for suspicious modifications to the Windows registry, such as the creation of new registry keys or entries related to NjRAT persistence mechanisms.
+  > - File System Changes: Look for changes to the file system, such as the creation of new files or directories associated with NjRAT, especially in common locations used by malware for persistence, such as %APPDATA% or %TEMP%.
+  > - Anti-Virus Alerts: Pay attention to any alerts or warnings from anti-virus or endpoint security software indicating the presence of NjRAT or related malware on the infected machine.
+  > - Anomalous Behavior: Watch for any other anomalous behavior on the infected machine, such as unexpected system crashes, slowdowns, or unusual user activity, which could indicate the presence of malware.
+
+  > By monitoring for these indicators of compromise, network administrators can detect and respond to NjRAT infections promptly, mitigating the potential damage and preventing further spread within their network. Additionally, implementing robust security measures, such as endpoint protection, network segmentation, and user education, can help prevent NjRAT infections and other malware threats.
+
+
+## Aditional Notes
+I decided to reboot the VM without restoring the snapshot to see how the malware behaves. Once the machine booted back on, I started FakeNet and I noticed it immediately started catching DNS request to zaaptoo.zapto.org as shown on the next picture:   
+![PXL_20240409_072225489~2](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/1c73347d-6a6d-4d1a-b737-4a83f25f1dde)
