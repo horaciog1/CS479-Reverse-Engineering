@@ -42,14 +42,73 @@ Here are some pictures from [Samsar4 lab](https://github.com/Samsar4/Ethical-Hac
 RegShot is used to take a snapshot of the registry in Windows, a fundamental artifact for digital forensics on Windows. Double-check your network is disabled before running the RAT.
 We will take a snapshot of the registry before running the RAT and then we will run the RAT and take another snapshot, and thus compare both snapshots using RegShot to see what has been changed.
 
+This is the preview of the comparison of both snapshots:   
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/f92afb73-0f28-4168-8ff1-76cc1a2a7734)
+
+
 - What registry keys changed?
-  
+> It deleted 2 keys, added 14 new key, added 43 new values to this registers, and modified 90 keys.
+
 - What was added?
+> It change some firewall rules to avoid detection and also change stuff to allow the execution of the malware during startup, it also change the following:
+> 1. **Process (2084) njRAT.exe:**
+>    - **Key:** HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap
+>      - **Operation:** Write
+>      - **Name:** ProxyBypass
+>      - **Value:** 1
+>      - **Operation:** Write
+>      - **Name:** IntranetName
+>      - **Value:** 1
+>      - **Operation:** Write
+>      - **Name:** UNCAsIntranet
+>      - **Value:** 1
+>      - **Operation:** Write
+>      - **Name:** AutoDetect
+>      - **Value:** 0
+> 
+> 2. **Process (1380) njq8.exe:**
+>    - **Key:** HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap
+>      - **Operation:** Write
+>      - **Name:** ProxyBypass
+>      - **Value:** 1
+>      - **Operation:** Write
+>      - **Name:** IntranetName
+>      - **Value:** 1
+>      - **Operation:** Write
+>      - **Name:** UNCAsIntranet
+>      - **Value:** 1
+>      - **Operation:** Write
+>      - **Name:** AutoDetect
+>      - **Value:** 0
+> 
+> 3. **Process (1584) netsh.exe:**
+>    - **Key:** HKEY_CLASSES_ROOT\Local Settings\MuiCache\182\52C64B7E
+>      - **Operation:** Write
+>      - **Name:** LanguageList
+>      - **Value:** en-US
+> 
+> 4. **Process (1044) windows.exe:**
+>    - **Key:** HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+>      - **Operation:** Write
+>      - **Name:** ecc7c8c51c0850c1ec247c7fd3602f20
+>      - **Value:** "C:\Users\admin\AppData\Local\Temp\windows.exe" ..
+> 
+> 5. **Process (1044) windows.exe:**
+>    - **Key:** HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+>      - **Operation:** Write
+>      - **Name:** ecc7c8c51c0850c1ec247c7fd3602f20
+>      - **Value:** "C:\Users\admin\AppData\Local\Temp\windows.exe" ..
+
+
 
 - Does this appear to be for persistence, or something else?
+  > The significant number of additions, deletions, and modifications to registry keys and values suggest that the changes made by NjRAT are likely for persistence purposes. Malware often manipulates the registry to ensure its automatic execution upon system startup or to maintain its presence on the infected system.
 
 - What clues (Indicators of Compromise) could someone look for in the registry to detect an NjRAT infection?
-  > - Registry Modifications: Check for suspicious modifications to the Windows registry, such as the creation of new registry keys or entries related to NjRAT persistence mechanisms.
+  > - Look for suspicious modifications to the Windows registry, such as the creation of new registry keys or entries related to NjRAT persistence mechanisms.
+  > - Specifically, pay attention to changes in startup keys or values (e.g., HKCU\Software\Microsoft\Windows\CurrentVersion\Run, HKLM\Software\Microsoft\Windows\CurrentVersion\Run), as malware often adds itself to these locations to ensure automatic execution upon system boot.
+  > - Monitor for modifications to registry keys or values associated with network configurations, security settings, or system services, as NjRAT may alter these to maintain control or evade detection.
+  > - Regularly review the registry for anomalous or unexpected changes, especially in areas commonly targeted by malware for persistence, such as startup locations, system services, or user profiles.
 
 
 ### File functionality of RegShot
@@ -58,6 +117,11 @@ RegShot allows you to take snapshots of directories as well. So then we will ide
 - What files or directories did you see changed?
   > Just by iterating trough the directories, I found that it dropped a bunch of different files in Local C disk root directory.
   > ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/6e97dd53-3f67-49c3-a311-f580248e9aab)
+  > It deleted 16 files, modified the attributes of 29, and added 8 new files.
+  > njRAT.exe | C:\njq8.exe | Executable
+  > windows.exe | C:\Users\horac\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ecc7c8c51c0850c1ec247c7fd3602f20.exe | Executable
+  > njq8.exe | C:\Users\horac\AppData\Local\Temp\windows.exe | Executable
+  > njRAT.exe | C:\njRAT.exe | Executable
   
 - Does this appear to be for persistence, or something else?
   > I noticed that on the startup apps, there were added a couple of executables that werent there before executing the malware. (this is mentioned at the end of the doc in Additional notes)
