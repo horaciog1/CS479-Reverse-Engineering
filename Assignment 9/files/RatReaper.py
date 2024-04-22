@@ -6,6 +6,7 @@ from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
 import base64
 import io
+import time
 
 class AntivirusApp:
     def __init__(self, master):
@@ -68,9 +69,14 @@ class AntivirusApp:
     def remove(self):
         # End processes spawned by njRAT
         self.killProcesses()
+        time.sleep(5)
+        self.killProcesses()
+        time.sleep(7)
 
         # Remove files added by njRAT and check if all files were successfully removed
-        success = self.delete_files()
+        self.delete_files()
+
+        time.sleep(5)
 
         # Check if all files were successfully removed
         messagebox.showinfo("Removal Result", "Removal process completed. Check terminal for errors.")
@@ -224,8 +230,11 @@ class AntivirusApp:
         print("\nERROR: The following files were not found. If the list is empty, please disregard this message. \nIf the files were not found, it could indicate that the removal process was successful. \nHowever, it could also mean that this version of njRAT is not currently running.\n")
         print("\n------- START OF THE LIST -------\n")
         self.removeRoot()
+        time.sleep(6)
         self.removeStartup()
+        time.sleep(6)
         self.removeTempFile()
+        time.sleep(6)
         print("\n------- END OF THE LIST -------\n")
 
     def get_icon_path(self):
