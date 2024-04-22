@@ -39,3 +39,5 @@ This report outlines the approach taken by my Antivirus (A/V) system to detect a
 - I had to put the base64 version of the icon image because it was not working as I wanted and it was giving me a lot of errors
 - The source code of my antivirus can be found on the "files" folder, the program is called "RatReaper.py"
 - The executable can be found in this same directory, or by [clicking here to download](https://github.com/horaciog1/CS479-Reverse-Engineering/blob/main/Assignment%209/RatReaper.exe)
+- There are sleep functions beetween each action to allow the system to kill processes and remove files, this process can take some time
+- [Video can be found here]()
