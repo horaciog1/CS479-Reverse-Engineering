@@ -66,21 +66,15 @@ class AntivirusApp:
                                             f"njRAT Currently Running:      {njrat_running}")
 
     def remove(self):
-        # Initialize list to store missing file paths
-        missing_files = []
-
         # End processes spawned by njRAT
         self.killProcesses()
 
         # Remove files added by njRAT and check if all files were successfully removed
-        success = self.delete_files(missing_files)
+        success = self.delete_files()
 
         # Check if all files were successfully removed
-        if success:
-            messagebox.showinfo("Removal Result", "Removal process completed.")
-        else:
-            # Display error messagebox with missing file paths
-            messagebox.showerror("Removal Error", f"The following files were not found, this could mean that this version of njRAT is not running:\n\n" + "\n".join(missing_files))
+        messagebox.showinfo("Removal Result", "Removal process completed. Check terminal for errors.")
+        
 
     def check_indicators_of_compromise(self):
         # List of files added by njRAT
@@ -114,11 +108,13 @@ class AntivirusApp:
 
         # CHECK FOR TEMP
         # Path to the temporary file to be deleted
-        temp_file_path = os.path.join(profile_dir, 'AppData', 'Local', 'Temp', 'windows.exe')
+        temp_files = ["windows.exe", "windows.exe.tmp"]
 
-        # Check if the file exists 
-        if os.path.exists(temp_file_path):
-            return True
+        # Check if any of the temporary files exist
+        for temp_file in temp_files:
+            temp_file_path = os.path.join(profile_dir, 'AppData', 'Local', 'Temp', temp_file)
+            if os.path.exists(temp_file_path):
+                return True
 
         return False
 
@@ -188,18 +184,22 @@ class AntivirusApp:
             print("Failed to retrieve user profile directory.")
             return
 
-        # Path to the temporary file to be deleted
-        temp_file_path = os.path.join(profile_dir, 'AppData', 'Local', 'Temp', 'windows.exe')
+        # Path to the temporary files to be deleted
+        temp_files = [
+            os.path.join(profile_dir, 'AppData', 'Local', 'Temp', 'windows.exe'),
+            os.path.join(profile_dir, 'AppData', 'Local', 'Temp', 'windows.exe.tmp')
+        ]
 
-        # Check if the file exists and delete it if found
-        if os.path.exists(temp_file_path):
-            try:
-                os.remove(temp_file_path)
-                print(f"Deleted: {temp_file_path}")
-            except OSError as e:
-                print(f"Error: {temp_file_path} - {e}")
-        else:
-            print(f"File not found: {temp_file_path}")      
+        for temp_file_path in temp_files:
+            # Check if the file exists and delete it if found
+            if os.path.exists(temp_file_path):
+                try:
+                    os.remove(temp_file_path)
+                    print(f"Deleted: {temp_file_path}")
+                except OSError as e:
+                    print(f"Error: {temp_file_path} - {e}")
+            else:
+                print(f"File not found: {temp_file_path}")   
 
     def killProcesses(self):
         # List of process names to kill
@@ -220,21 +220,13 @@ class AntivirusApp:
             except psutil.AccessDenied:
                 print(f"Access denied to kill process: {process_name}")
 
-    def delete_files(self, missing_files):
-        # Check if all files exist and remove them
-        success = True
-        if not self.removeRoot():
-            success = False
-            missing_files.extend([os.path.join("C:\\", file_name) for file_name in ["njq8.exe", "njRAT.exe"]])
-        if not self.removeStartup():
-            success = False
-            profile_dir = os.environ.get('USERPROFILE')
-            missing_files.append(os.path.join(profile_dir, 'AppData', 'Roaming', 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup', 'ecc7c8c51c0850c1ec247c7fd3602f20.exe'))
-        if not self.removeTempFile():
-            success = False
-            profile_dir = os.environ.get('USERPROFILE')
-            missing_files.append(os.path.join(profile_dir, 'AppData', 'Local', 'Temp', 'windows.exe'))
-        return success
+    def delete_files(self):
+        print("\nERROR: The following files were not found. If the list is empty, please disregard this message. \nIf the files were not found, it could indicate that the removal process was successful. \nHowever, it could also mean that this version of njRAT is not currently running.\n")
+        print("\n------- START OF THE LIST -------\n")
+        self.removeRoot()
+        self.removeStartup()
+        self.removeTempFile()
+        print("\n------- END OF THE LIST -------\n")
 
     def get_icon_path(self):
         # Check if the icon file exists in the same directory as the script
