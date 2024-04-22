@@ -34,10 +34,14 @@ This report outlines the approach taken by my Antivirus (A/V) system to detect a
 2. File Deletion:
     - Identified njRAT files and artifacts are deleted from the system using the file deletion API.
     - This includes removing executable files, temporary files, and startup entries associated with njRAT.
-  
+   
+
 ### Notes
 - I had to put the base64 version of the icon image because it was not working as I wanted and it was giving me a lot of errors
 - The source code of my antivirus can be found on the "files" folder, the program is called "RatReaper.py"
 - The executable can be found in this same directory, or by [clicking here to download](https://github.com/horaciog1/CS479-Reverse-Engineering/blob/main/Assignment%209/RatReaper.exe)
 - There are sleep functions beetween each action to allow the system to kill processes and remove files, this process can take some time
-- [Video can be found here]()
+- [Video can be found here](https://github.com/horaciog1/CS479-Reverse-Engineering/blob/main/Assignment%209/2024-04-22%2002-48-46.mp4)
+
+https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/6ce75505-758e-45b5-82b3-2ebb21cc3c0e
+
