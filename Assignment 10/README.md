@@ -59,7 +59,7 @@ Now that we have an idea on how the stack looks like, we can see where the RSP i
 ![327933224-a81186fc-3628-459b-ad86-0978a8bd3afb](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/983f70ef-056c-40de-a49a-6809a4acf20d)
 
 
-We take the address where RSP is pointing at and we substract the address of the shellcode from it. This operation will give us the amount of neccesary padding bytes to overwrite the neccesary places on the buffer. The result is `88` in hex because we are sending them as bytes directly.
+We take the address where RSP is pointing at and we substract the address of the shellcode from it. This operation will give us the amount of neccesary padding bytes to overwrite the neccesary places on the buffer. The result is `88` in hex because we are sending them as bytes directly.   
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/110dff45-0a44-4112-8a0f-3315e2fb135d)   
 
 Then we calculate the offset for the new return address that will be pointing to the shellcode. We substract the `address of the shellcode` from the `leaked address of the stack` that we got from the first input.   
@@ -69,7 +69,7 @@ Then we calculate the offset for the new return address that will be pointing to
 The result will then be `112` in decimal.   
 
 Now, in line 55 we are parsing the output of the leaked values, this values will be saved into a list, we select the 8th element from the list which will be the highest address, and we convert this string containing the address into a hex value. Then at the end we substact `112` in decimal from this hex value, this will then become our new return address.
-In line 56 we are setting up our input for the credit card field, our input will be a combination of the `shellcode` + `padding bytes` + `new return address`. We send the our input (line 58)
+In line 56 we are setting up our input for the credit card field, our input will be a combination of the `shellcode` + `padding bytes` + `new return address`. We send the our input (line 58).   
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/12b5a52b-c00f-46a2-b4e0-e6c87baa1a94)    
 If everything works as expected, we should be seen a new red terminal spawned. Line 62 allows us to take control over the machine, asking us for input on the new terminal.
 
