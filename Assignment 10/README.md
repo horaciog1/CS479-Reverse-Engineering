@@ -44,7 +44,11 @@ To achieve a succesful buffer overflow attack we need to meet three conditions:
 To get started I ran the program using my python script with pwntools. In line 24 we are telling the program to run the pizza program. Then in lines 26 and 28 we are setting up some parameters about our proccesor and computer. Pwntools library includes a shellcode that we can use to spawn the shell, this is declared in line 35.
 Then we input a format string to leak values from the stack (line 37). We run the program (line 39), recieve and print the welcome message (line 42), and then we send "our name" which in this case will be the format string to leak values (line 45).
 
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/dda49cd8-5609-47a6-abc4-42da58c5d0e3)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/dda49cd8-5609-47a6-abc4-42da58c5d0e3)    
+
+    
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/d2b11f06-0ebf-4fc0-9d06-e9027e133e4f)
+
 
 ## Buffer Overflow script
 
