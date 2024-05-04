@@ -22,7 +22,24 @@ To achieve this we need to meet three conditions:
   sudo python3 -m pip install --upgrade pwntools -y
   ```
 - Download the program we are going to take over. Victim program: [(Pizza)](https://github.com/tolvumadur/Reverse-Engineering-Class/blob/main/Spring24/Samples/binaries/pizza)
-Note: The victim program was
+  
+# Findings about the victim program: pizza
+This program appears to be a simple pizza calculator/delivery app. Here's how it works:
+
+1. The program prompts the user to input their name for the order.
+2. After receiving the name input, it acknowledges the user with a greeting containing their name.
+3. Then, it asks the user to specify the number of pizzas they would like to order, within the range of 1 to 10.
+4. Upon receiving the number of pizzas, it confirms the order and informs the user that the pizzas will be prepared.
+5. Next, it calculates the total cost of the order, including the cost of the pizzas and tax.
+6. It displays the total amount to the user.
+7. Finally, it requests the user to input their credit card number for payment.
+8. After receiving the credit card number, it confirms the payment method and completes the transaction.
+
+After using Ghidra to inspect the program we can see that the program is using a not very secure function that allows the user to input a format string. Dr. Reynolds mentioned that a format string such as `%p` can leak values from the stack.
+
+
+
+# Buffer Overflow script
 
 ```python3
 #!/usr/bin/env python3
