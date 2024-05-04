@@ -42,12 +42,16 @@ To achieve a succesful buffer overflow attack we need to meet three conditions:
 3. We need to be able to predict at what address our shellcode will be so we can return to it.
 
 To get started I ran the program using my python script with pwntools. In line 24 we are telling the program to run the pizza program. Then in lines 26 and 28 we are setting up some parameters about our proccesor and computer. Pwntools library includes a shellcode that we can use to spawn the shell, this is declared in line 35.
-Then we input a format string to leak values from the stack (line 37). We run the program (line 39), recieve and print the welcome message (line 42), and then we send "our name" which in this case will be the format string to leak values (line 45).
+Then we input a format string to leak values from the stack (line 37). We run the program (line 39), recieve and print the welcome message (line 42), and then we send "our name" which in this case will be the format string to leak values (line 45). Recieve and print the Hi message that will contain the leak values (lines 47-48).
 
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/dda49cd8-5609-47a6-abc4-42da58c5d0e3)    
 
-    
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/2a0d9983-3d1b-47db-95ec-aa8df0c18061)
+
+The output will look like this:
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/2a0d9983-3d1b-47db-95ec-aa8df0c18061)   
+If we pay close attention to the values printed, we can notice that the 3 last values are addresses from the stack (we know this because of the format).
+
+We keep sending values from the other fields, we send a `10` for the number of pizzas, but for the credit card number we send a bunch of A's (it can be any character) to get the program to crash so that we can get a segfault error and this will generate a corefile containing information about the crash. I created a function to get stack information from the corefile of the crash, and my function prints the addresses and the values at that part, it also show us where the RSP (stack pointer) is pointing to.
 
 
 ## Buffer Overflow script
