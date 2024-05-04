@@ -8,11 +8,6 @@ Dr. Reynolds explained that when a programmer permits writing more data into a b
 
 The approach for this assignment involves injecting shellcode directly into the buffer and ensuring that the IP register points to the beginning of this shellcode. Then later, the shellcode executes within the program, invoking functions like execve and replacing the current program with a shell accessible to the attacker.
 
-To achieve this we need to meet three conditions:
-1. We need to find out how many bytes after the beginning of the buffer are there before the return address.
-2. We need to inject padding bytes plus a new return address, plus some shellcode.
-3. We need to be able to predict at what address our shellcode will be so we can return to it.
-
 ## Requiered files and dependencies
 - Install pwntools using the following commands on the terminal
   ```bash
@@ -37,6 +32,17 @@ This program appears to be a simple pizza calculator/delivery app. Here's how it
 
 After using Ghidra to inspect the program we can see that the program is using a not very secure function that allows the user to input a format string. Dr. Reynolds mentioned that a format string such as `%p` can leak values from the stack.
 
+
+## Process for building the script
+We were asked by the professor to see if we were able to crash the program by running it and inputting data. So what we did was input a large number of random characters into the name field. As we gradually increased the input length, we observed the program's behavior. Upon reaching a certain threshold, the program crashed and displayed a segmentation fault error. This crash occurred because our input overflowed the buffer, thereby overwriting critical memory areas, including the return address. Consequently, the program became unable to execute further instructions, resulting in the segmentation fault error.
+
+To achieve a succesful buffer overflow attack we need to meet three conditions:
+1. We need to find out how many bytes after the beginning of the buffer are there before the return address.
+2. We need to inject padding bytes plus a new return address, plus some shellcode.
+3. We need to be able to predict at what address our shellcode will be so we can return to it.
+
+To get started I ran the program using my python script with pwntools. In line 24 we are telling the program to run the pizza program. Then in lines 26 and 28 we are setting up some parameters about our proccesor and computer. Pwntools library includes a shellcode that we can use to spawn the shell, this is declared in line 35.
+Then we input a format string to leak values from the stack (line 37). We run the program (line 39), recieve and print the welcome message (line 42), and then we send "our name" which in this case will be the format string to leak values (line 45).
 
 
 ## Buffer Overflow script
