@@ -13,7 +13,7 @@ To achieve this we need to meet three conditions:
 2. We need to inject padding bytes plus a new return address, plus some shellcode.
 3. We need to be able to predict at what address our shellcode will be so we can return to it.
 
-# Requiered files and dependencies
+## Requiered files and dependencies
 - Install pwntools using the following commands on the terminal
   ```bash
   sudo apt-get update -y
@@ -23,7 +23,7 @@ To achieve this we need to meet three conditions:
   ```
 - Download the program we are going to take over. Victim program: [(Pizza)](https://github.com/tolvumadur/Reverse-Engineering-Class/blob/main/Spring24/Samples/binaries/pizza)
   
-# Findings about the victim program: pizza
+## Findings about the victim program: pizza
 This program appears to be a simple pizza calculator/delivery app. Here's how it works:
 
 1. The program prompts the user to input their name for the order.
@@ -39,7 +39,7 @@ After using Ghidra to inspect the program we can see that the program is using a
 
 
 
-# Buffer Overflow script
+## Buffer Overflow script
 
 ```python3
 #!/usr/bin/env python3
