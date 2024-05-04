@@ -70,7 +70,7 @@ The result will then be `112` in decimal.
 
 Now, in line 55 we are parsing the output of the leaked values, this values will be saved into a list, we select the 8th element from the list which will be the highest address, and we convert this string containing the address into a hex value. Then at the end we substact `112` in decimal from this hex value, this will then become our new return address.
 In line 56 we are setting up our input for the credit card field, our input will be a combination of the `shellcode` + `padding bytes` + `new return address`. We send the our input (line 58)
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/7f5b3e0e-a9a4-4df3-aabb-1b8f5d49f0fc)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/12b5a52b-c00f-46a2-b4e0-e6c87baa1a94)
 
 
 
