@@ -47,11 +47,15 @@ Then we input a format string to leak values from the stack (line 37). We run th
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/dda49cd8-5609-47a6-abc4-42da58c5d0e3)    
 
 
-The output will look like this:
+The output will look like this:   
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/2a0d9983-3d1b-47db-95ec-aa8df0c18061)   
 If we pay close attention to the values printed, we can notice that the 3 last values are addresses from the stack (we know this because of the format).
 
-We keep sending values from the other fields, we send a `10` for the number of pizzas, but for the credit card number we send a bunch of A's (it can be any character) to get the program to crash so that we can get a segfault error and this will generate a corefile containing information about the crash. I created a function to get stack information from the corefile of the crash, and my function prints the addresses and the values at that part, it also show us where the RSP (stack pointer) is pointing to.
+We keep sending values from the other fields, we send a `10` for the number of pizzas, but for the credit card number we send a bunch of A's (it can be any character) to get the program to crash so that we can get a segfault error and this will generate a corefile containing information about the crash. I created a function to get stack information from the corefile of the crash, and my function prints the addresses and the values at that part, it also show us where the RSP (stack pointer) is pointing to.   
+
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/daf459ad-cbda-42ae-9b0e-ca57684f1bee)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/a81186fc-3628-459b-ad86-0978a8bd3afb)
+
 
 
 ## Buffer Overflow script
