@@ -47,7 +47,7 @@ Then we input a format string to leak values from the stack (line 37). We run th
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/dda49cd8-5609-47a6-abc4-42da58c5d0e3)    
 
     
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/d2b11f06-0ebf-4fc0-9d06-e9027e133e4f)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/2a0d9983-3d1b-47db-95ec-aa8df0c18061)
 
 
 ## Buffer Overflow script
