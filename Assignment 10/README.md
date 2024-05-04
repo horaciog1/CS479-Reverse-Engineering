@@ -53,7 +53,9 @@ If we pay close attention to the values printed, we can notice that the 3 last v
 
 We keep sending values from the other fields, we send a `10` for the number of pizzas, but for the credit card number we send a bunch of A's (it can be any character) to get the program to crash so that we can get a segfault error and this will generate a corefile containing information about the crash. I created a function to get stack information from the corefile of the crash, and my function prints the addresses and the values at that part, it also show us where the RSP (stack pointer) is pointing to.   
 
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/daf459ad-cbda-42ae-9b0e-ca57684f1bee)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/daf459ad-cbda-42ae-9b0e-ca57684f1bee)    
+
+Now that we have an idea on how the stack looks like, we can see where the RSP is pointing to (which is the return address), and at the address `0x7ffc89097ca0` we can see the beggining of the shellcode. CPU's are protected against these types of attacks, they use something called Address Space Layout Randomization (ASLR) which basically is in charge of running program on random locations every time they are run. This makes almost impossible and inpredictibale to calculate where our shellcode should be. But since we already have the values, and after running the script a couple of times, we notice that theres is always the same amount of space beetween the addresses leaked.
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/a81186fc-3628-459b-ad86-0978a8bd3afb)
 
 
