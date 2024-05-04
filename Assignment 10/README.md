@@ -55,8 +55,11 @@ We keep sending values from the other fields, we send a `10` for the number of p
 
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/daf459ad-cbda-42ae-9b0e-ca57684f1bee)    
 
-Now that we have an idea on how the stack looks like, we can see where the RSP is pointing to (which is the return address), and at the address `0x7ffc89097ca0` we can see the beggining of the shellcode. CPU's are protected against these types of attacks, they use something called Address Space Layout Randomization (ASLR) which basically is in charge of running program on random locations every time they are run. This makes almost impossible and inpredictibale to calculate where our shellcode should be. But since we already have the values, and after running the script a couple of times, we notice that theres is always the same amount of space beetween the addresses leaked.
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/a81186fc-3628-459b-ad86-0978a8bd3afb)
+Now that we have an idea on how the stack looks like, we can see where the RSP is pointing to (which is the return address), and at the address `0x7ffc89097ca0` we can see the beggining of the shellcode. CPU's are protected against these types of attacks, they use something called Address Space Layout Randomization (ASLR) which basically is in charge of running program on random locations every time they are run. This makes almost impossible and inpredictibale to calculate where our shellcode should be. But since we already have the values, and after running the script a couple of times, we notice that theres is always the same amount of space beetween the addresses leaked.   
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/a81186fc-3628-459b-ad86-0978a8bd3afb)   
+
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/7f5b3e0e-a9a4-4df3-aabb-1b8f5d49f0fc)
+
 
 
 
