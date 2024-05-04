@@ -59,6 +59,9 @@ Now that we have an idea on how the stack looks like, we can see where the RSP i
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/a81186fc-3628-459b-ad86-0978a8bd3afb)   
 
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/7f5b3e0e-a9a4-4df3-aabb-1b8f5d49f0fc)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/110dff45-0a44-4112-8a0f-3315e2fb135d)
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/54c2025d-a614-4ff7-9838-4abdcfce1020)
+
 
 
 
