@@ -9,7 +9,7 @@ Dr. Reynolds explained that when a programmer permits writing more data into a b
 The approach for this assignment involves injecting shellcode directly into the buffer and ensuring that the IP register points to the beginning of this shellcode. Then later, the shellcode executes within the program, invoking functions like execve and replacing the current program with a shell accessible to the attacker.
 
 ## Requiered files and dependencies
-- Install pwntools using the following commands on the terminal
+- Install `pwntools` using the following commands on the terminal
   ```bash
   sudo apt-get update -y
   sudo apt-get install python3 python3-pip python3-dev git libssl-dev libffi-dev build-essential -y
@@ -55,12 +55,23 @@ We keep sending values from the other fields, we send a `10` for the number of p
 
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/daf459ad-cbda-42ae-9b0e-ca57684f1bee)    
 
-Now that we have an idea on how the stack looks like, we can see where the RSP is pointing to (which is the return address), and at the address `0x7ffc89097ca0` we can see the beggining of the shellcode. CPU's are protected against these types of attacks, they use something called Address Space Layout Randomization (ASLR) which basically is in charge of running program on random locations every time they are run. This makes almost impossible and inpredictibale to calculate where our shellcode should be. But since we already have the values, and after running the script a couple of times, we notice that theres is always the same amount of space beetween the addresses leaked.   
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/a81186fc-3628-459b-ad86-0978a8bd3afb)   
+Now that we have an idea on how the stack looks like, we can see where the RSP is pointing to (which is the return address), and at the address `0x7ffc89097ca0` (red arrow) we can see the beggining of the shellcode. CPU's are protected against these types of attacks, they use something called Address Space Layout Randomization (ASLR) which basically is in charge of running program on random locations every time they are run. This makes almost impossible and inpredictibale to calculate where our shellcode should be. But since we already have the values, and after running the script a couple of times, we notice that there is always the same amount of space beetween the addresses leaked. So then with these three addresses we can calculate the offset, predict where our shellcode will be, and inject the right amount of padding bytes to overwrite the return address. 
+![327933224-a81186fc-3628-459b-ad86-0978a8bd3afb](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/983f70ef-056c-40de-a49a-6809a4acf20d)
 
+
+We take the address where RSP is pointing at and we substract the address of the shellcode from it. This operation will give us the amount of neccesary padding bytes to overwrite the neccesary places on the buffer. The result is `88` in hex because we are sending them as bytes directly.
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/110dff45-0a44-4112-8a0f-3315e2fb135d)   
+
+Then we calculate the offset for the new return address that will be pointing to the shellcode. We substract the `address of the shellcode` from the `leaked address of the stack` that we got from the first input.   
+![327932750-2a0d9983-3d1b-47db-95ec-aa8df0c18061](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/1401ed14-938d-4ffa-b308-d66c2f1aa99a)
+
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/54c2025d-a614-4ff7-9838-4abdcfce1020)    
+The result will then be `112` in decimal.   
+
+Now, in line 55 we are parsing the output of the leaked values, this values will be saved into a list, we select the 8th element from the list which will be the highest address, and we convert this string containing the address into a hex value. Then at the end we substact `112` in decimal from this hex value, this will then become our new return address.
+In line 56 we are setting up our input for the credit card field, our input will be a combination of the `shellcode` + `padding bytes` + `new return address`. We send the our input (line 58)
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/7f5b3e0e-a9a4-4df3-aabb-1b8f5d49f0fc)
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/110dff45-0a44-4112-8a0f-3315e2fb135d)
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/54c2025d-a614-4ff7-9838-4abdcfce1020)
+
 
 
 
