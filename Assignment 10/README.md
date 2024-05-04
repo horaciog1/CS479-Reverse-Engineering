@@ -74,11 +74,8 @@ In line 56 we are setting up our input for the credit card field, our input will
 If everything works as expected, we should be seen a new red terminal spawned. Line 62 allows us to take control over the machine, asking us for input on the new terminal.
 
 ![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/324ae007-d943-44cf-9a30-34ca8ba374a3)
-![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/d6f21290-fe45-41fb-9db7-ef5f7a6bec0b)
-
-
-
-
+![image](https://github.com/horaciog1/CS479-Reverse-Engineering/assets/111658514/d6f21290-fe45-41fb-9db7-ef5f7a6bec0b)    
+This gives us access to a totally new terminal!
 
 ## Buffer Overflow script
 
